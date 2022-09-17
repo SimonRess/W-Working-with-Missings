@@ -5,7 +5,7 @@ title: |
        </center>
 subtitle:  "Multiple Imputation and subsequent calculations"
 author: "Simon Ress | Ruhr-Universität Bochum"
-institute: "Workshop at hr c, Bochum, 2021"
+institute: "Workshop at hr&c, Bochum, 2021"
 date: "September 22, 2022"
 
 output:
@@ -20,7 +20,7 @@ header-includes:
   - \usetheme[numbering=fraction]{metropolis}
 #Define footer:
   - \definecolor{beaublue}{RGB}{182, 203, 201} #{0.74, 0.83, 0.9}
-  - \setbeamertemplate{frame footer}{\tiny{\textcolor{beaublue}{Workshop Multiple Imputation and subsequent calculations (at hr c),  2022 | SIMON RESS}}}
+  - \setbeamertemplate{frame footer}{\tiny{\textcolor{beaublue}{Workshop Multiple Imputation and subsequent calculations (at hr\&c),  2022 | SIMON RESS}}}
 #hide footer on title page:
   - |
     \makeatletter
@@ -92,22 +92,88 @@ knitr::opts_chunk$set(echo = FALSE)
 ## Content
 \tableofcontents[]
 
-# Metropolis theme
+# Examplary Data Set
+
+## Planing of the Data Set
+
+```{r planing-dataset-creation, out.width = "100%", message=FALSE, out.height="100%"}
+#Link: https://mermaid-js.github.io/mermaid/#/flowchart  # , fig.width = 5, fig.asp = .2
+#Libraries:
+  if(!require(DiagrammeR)) install.packages("DiagrammeR")
+  library(DiagrammeR)
+  #required fpr mermaid usage in pdf-files:
+    #if(!require(webshot)) install.packages("webshot")
+    #webshot::install_phantomjs()
+mermaid("
+graph LR
+  Mann-->|+0.2%|FK
+  Alter-->|+0.1%|FK
+  FK-->|+2.0|B2.1
+  FK-->|+1.5|B5.1
+  B2.1-->|+0.2|B5.1
+  Alter-->|-0.30|B5.1
+", width = 200, height = 200)
+```
+
+## Data Set Creation
+```{r dataset-creation, echo=TRUE, size="tiny"}
+#Create variables
+set.seed(415)
+Mann = ifelse(runif(5000,0,1) < 0.50, 1, 0)
+Alter = as.numeric(cut(runif(5000,20,70), c(20,30,40,50,60,70)))
+FK = ifelse((Mann*0.2 + Alter*0.1 + runif(5000,0,0.6)) > 0.95, 1, 0)
+B2.1 = as.numeric(cut(FK*2 + rnorm(5000,2,0.35), c(0,1,2,3,4,6)))
+set.seed(1015)
+B5.1 = as.numeric(cut(FK*1.5 + B2.1*0.2 + Alter*(-0.30) + rnorm(5000,2.5,0.30), c(-2,1,2,3,4,8)))
+
+#Build data frame
+df = data.frame(Mann, Alter, FK, B2.1, B5.1)
+```
+
+## View Data Set
+```{r dataset-head, echo=TRUE}
+df
+```
+
+## Check 
+
+# Missing Patterns
+
+## Missing Patterns: Missing completely at random (MCAR)
+
+- Values are randomly missing in the dataset
+  - Missing data values do not relate to any other data
+  - There is no pattern to the actual values of the missing data themselves
+- For instance, when smoking status is not recorded in a random subset of patients
+- This is easy to handle, but unfortunately, data are almost never missing completely at random
+
+## MCAR: Inserting Missing values in data frame
+
+
+## Missing Patterns: Missing at random (MAR)
+
+- Confusing and would be better stated as *missing conditionally at random*
+- Missing data do have a relationship with other variables in the dataset
+  - Whether a value is missing or not depends on other variables
+- The actual values that are missing are random
+- For example, smoking status is not documented in female patients because the doctor was too shy to ask
+
+
+## Missing Patterns: Missing not at random (MNAR)
+
+- The pattern of missingness is related to other variables in the dataset 
+- In addition, the values of the missing data are not random
+  - Whether a value is missing or not depends on other variables
+- For example, when smoking status is not recorded in patients admitted as an emergency, who are also more likely to have worse outcomes from surgery
+
+
 
 ## Main Repos
 
 - [Official GitHub Repo of Metropolis](https://github.com/matze/mtheme)
   (formerly mtheme); older version in TeXLive 
 - [My GitHub Repo for a local Ubuntu package of Metropolis](https://github.com/eddelbuettel/pkg-latex-metropolis) -- formerly mtheme
-- [Manuel](https://mirror.physik.tu-berlin.de/pub/CTAN/macros/latex/contrib/beamer-contrib/themes/metropolis/doc/metropolistheme.pdf) 
-
-## Customization
-
-test
-
-# Examplary usage
-
-Test
+- [Manuel](https://mirror.physik.tu-berlin.de/pub/CTAN/macros/latex/contrib/beamer-contrib/themes/metropolis/doc/metropolistheme.pdf)
 
 ## Slide with Bullets
 
