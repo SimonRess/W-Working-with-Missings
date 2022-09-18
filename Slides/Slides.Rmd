@@ -8,6 +8,8 @@ author: "Simon Ress | Ruhr-Universität Bochum"
 institute: "Workshop at hr&c, Bochum, 2021"
 date: "September 22, 2022"
 
+fontsize: 10pt
+
 output:
   beamer_presentation:
     keep_md: true
@@ -86,6 +88,10 @@ knitr::opts_chunk$set(echo = FALSE)
 # tintytex::parse_packages()
 # tinytex::tl_pkgs()
 # tinytex::parse_install("metropolis")
+
+# Markdown text sizes: Huge > huge > LARGE > Large > large > normalsize > small > footnotesize > scriptsize > tiny
+#Usage: \tiny
+
 ```
 
 
@@ -94,48 +100,210 @@ knitr::opts_chunk$set(echo = FALSE)
 
 # Examplary Data Set
 
-## Planing of the Data Set
+## Planing the interdependencies of variables
 
-```{r planing-dataset-creation, out.width = "100%", message=FALSE, out.height="100%"}
-#Link: https://mermaid-js.github.io/mermaid/#/flowchart  # , fig.width = 5, fig.asp = .2
+- Every variable is constructed by an *random term*
+- Some variables are influenced by *values of other variables*
+- **e.g. "Mann" = 1 increases the probability for FK=1 by 20%**
+
+```{r planing-dataset-creation, out.width = "100%", out.height="90%", message=FALSE}
+#Link: https://mermaid-js.github.io/mermaid/#/flowchart  # , fig.width = 5,    , fig.asp = 2 fig.dim = c(6,2), 
 #Libraries:
   if(!require(DiagrammeR)) install.packages("DiagrammeR")
   library(DiagrammeR)
   #required fpr mermaid usage in pdf-files:
     #if(!require(webshot)) install.packages("webshot")
     #webshot::install_phantomjs()
-mermaid("
-graph LR
-  Mann-->|+0.2%|FK
-  Alter-->|+0.1%|FK
-  FK-->|+2.0|B2.1
-  FK-->|+1.5|B5.1
-  B2.1-->|+0.2|B5.1
-  Alter-->|-0.30|B5.1
-", width = 200, height = 200)
+
+ DiagrammeR::mermaid("
+  graph LR
+    Mann-->|+20%|FK
+    Alter-->|+10%|FK
+    FK-->|+2.0|B2.1
+    FK-->|+1.5|B5.1
+    B2.1-->|+0.2|B5.1
+    Alter-->|-0.30|B5.1
+  ", width = "100%", height = "100%") # %>% plotly::save_image(., file = "aa.png")
 ```
 
+
+
 ## Data Set Creation
-```{r dataset-creation, echo=TRUE, size="tiny"}
+
+\footnotesize
+```{r dataset-creation, echo=TRUE}
 #Create variables
 set.seed(415)
 Mann = ifelse(runif(5000,0,1) < 0.50, 1, 0)
-Alter = as.numeric(cut(runif(5000,20,70), c(20,30,40,50,60,70)))
-FK = ifelse((Mann*0.2 + Alter*0.1 + runif(5000,0,0.6)) > 0.95, 1, 0)
-B2.1 = as.numeric(cut(FK*2 + rnorm(5000,2,0.35), c(0,1,2,3,4,6)))
+Alter = as.numeric(cut(runif(5000,20,70), 
+                       c(20,30,40,50,60,70)))
+FK = ifelse((Mann*0.2 + Alter*0.1 + 
+             runif(5000,0,0.6)) > 0.95, 1, 0)
+B2.1 = as.numeric(cut(FK*2 + 
+                      rnorm(5000,2,0.35), c(0,1,2,3,4,6)))
 set.seed(1015)
-B5.1 = as.numeric(cut(FK*1.5 + B2.1*0.2 + Alter*(-0.30) + rnorm(5000,2.5,0.30), c(-2,1,2,3,4,8)))
+B5.1 = as.numeric(cut(FK*1.5 + B2.1*0.2 + Alter*(-0.30) + 
+                      rnorm(5000,2.5,0.30), c(-2,1,2,3,4,8)))
 
 #Build data frame
 df = data.frame(Mann, Alter, FK, B2.1, B5.1)
 ```
+\normalsize
+
 
 ## View Data Set
 ```{r dataset-head, echo=TRUE}
-df
+head(df,10)
 ```
 
-## Check 
+
+## I. Check whether true effects can be estimated
+\scriptsize
+```{r I-Check-Calculation-of-Effects, echo=FALSE, message=FALSE}
+# Mann -(+0.2)-> FK
+  knitr::kable(summary(lm(FK~Mann, data = df))$coefficients, digits = 4, caption = "lm(FK~Mann) | Mann: +0.2", format = 'markdown')
+  
+# Alter -(+0.1)-> FK
+  knitr::kable(summary(lm(FK~Alter, data = df))$coefficients, digits = 4, caption = "lm(FK~Alter) | Alter: +0.1", format = 'markdown')
+
+# FK -(+2)-> B2.1
+  knitr::kable(summary(lm(B2.1~FK, data = df))$coefficients, digits = 4, caption = "lm(B2.1~FK) | FK: +2", format = 'markdown')
+```
+\normalsize
+
+
+## II. Check whether true effects can be estimated (!)
+\scriptsize
+```{r II-Check-Calculation-of-Effects, echo=FALSE, message=FALSE}
+# FK -(+1.5)-> B5.1
+  knitr::kable(summary(lm(B5.1~FK, data = df))$coefficients, digits = 4, caption = "lm(B5.1~FK) | FK: +1.5")
+
+# B2.1 -(+0.2)-> B5.1
+  knitr::kable(summary(lm(B5.1~B2.1, data = df))$coefficients, digits = 4, caption = "lm(B5.1~B2.1) | B2.1: +0.2")
+
+# Alter -(-0.3)-> B5.1
+  knitr::kable(summary(lm(B5.1~Alter, data = df))$coefficients, digits = 4, caption = "lm(B5.1~Alter) | Alter: -0.3")
+```
+\normalsize
+
+
+## Excursus: Modern Causal Analysis
+
+- Satisfaction of the Conditional Independence Assumption (CIA) necessary to estimate true causal effects
+- Meet the CIA using an appropriate set of control variables
+- Choose control variables by a Directed Acyclic Graph (DAG)
+
+
+## Excursus MCA: DAG (B5.1 <- FK)
+\scriptsize
+```{r DAG1, echo=FALSE, message=FALSE, fig.width = 8, fig.height = 3.5}
+if(!require(ggdag)) install.packages("ggdag")
+library(ggdag)
+library(ggplot2)
+dag.1 <- dagify(B5.1 ~ FK,
+                B5.1 ~B2.1,
+                B2.1 ~FK,
+                FK ~ Alter,
+                B5.1 ~ Alter,
+                     labels = c("B5.1" = "B5.1", 
+                                "FK" = "FK",
+                                "B2.1"= "B2.1",
+                                "Alter" = "Alter"),
+                     
+                     exposure = "FK",
+                     outcome = "B5.1")
+    
+    # ggdag(dag.1, text = FALSE, use_labels = "label") # DAG
+    # ggdag_status(dag.1) # DAG with variable status (exposure/outcome/latent)
+    # ggdag_paths(dag.1, text = FALSE, use_labels = "label") #exposure and outcome must be defined
+    # ggdag_adjustment_set(dag.1, text = FALSE, use_labels = "label") #sets of covariates needed for unbiased estimation
+ ggdag_dconnected(dag.1, text = FALSE, use_labels = "label") +
+  theme_void() +
+  theme(
+    plot.background = element_rect(fill = "white"), #darkgrey
+    plot.title = element_text(color = "black"),
+    plot.subtitle = element_text(color = "black")
+  ) + labs(title = "Directed Acyclic Graph", subtitle = "Effect of Interest: B5.1 <- FK")
+ 
+ # FK -(+1.5)-> B5.1
+  knitr::kable(summary(lm(B5.1~FK+B2.1+Alter, data = df))$coefficients[1:2,], digits = 4, caption = "lm(B5.1~FK+B2.1+Alter) | FK: +1.5")
+```
+\normalsize
+
+
+## Excursus MCA: DAG (B5.1 <- B2.1)
+\scriptsize
+```{r DAG2, echo=FALSE, message=FALSE, fig.width = 8, fig.height = 3.5}
+if(!require(ggdag)) install.packages("ggdag")
+library(ggdag)
+library(ggplot2)
+dag.2 <- dagify(B5.1 ~ FK,
+                B5.1 ~B2.1,
+                B2.1 ~FK,
+                FK ~ Alter,
+                B5.1 ~ Alter,
+                     labels = c("B5.1" = "B5.1", 
+                                "FK" = "FK",
+                                "B2.1"= "B2.1",
+                                "Alter" = "Alter"),
+                     
+                     exposure = "B2.1",
+                     outcome = "B5.1")
+    
+    # ggdag(dag.1, text = FALSE, use_labels = "label") # DAG
+    # ggdag_status(dag.1) # DAG with variable status (exposure/outcome/latent)
+    # ggdag_paths(dag.1, text = FALSE, use_labels = "label") #exposure and outcome must be defined
+    # ggdag_adjustment_set(dag.1, text = FALSE, use_labels = "label") #sets of covariates needed for unbiased estimation
+ ggdag_dconnected(dag.2, text = FALSE, use_labels = "label") +
+  theme_void() +
+  theme(
+    plot.background = element_rect(fill = "white"), #darkgrey
+    plot.title = element_text(color = "black"),
+    plot.subtitle = element_text(color = "black")
+  ) + labs(title = "Directed Acyclic Graph", subtitle = "Effect of Interest: B5.1 <- B2.1")
+ 
+ # FK -(+1.5)-> B5.1
+  knitr::kable(summary(lm(B5.1~B2.1+FK+Alter, data = df))$coefficients[1:2,], digits = 4, caption = "lm(B5.1~B2.1+FK+Alter) | B2.1: +0.2")
+```
+\normalsize
+
+
+## Excursus MCA: DAG (B5.1 <- Alter)
+\scriptsize
+```{r DAG3, echo=FALSE, message=FALSE, fig.width = 8, fig.height = 3.5}
+if(!require(ggdag)) install.packages("ggdag")
+library(ggdag)
+library(ggplot2)
+dag.3 <- dagify(B5.1 ~ FK,
+                B5.1 ~B2.1,
+                B2.1 ~FK,
+                FK ~ Alter,
+                B5.1 ~ Alter,
+                     labels = c("B5.1" = "B5.1", 
+                                "FK" = "FK",
+                                "B2.1"= "B2.1",
+                                "Alter" = "Alter"),
+                     
+                     exposure = "Alter",
+                     outcome = "B5.1")
+    
+    # ggdag(dag.1, text = FALSE, use_labels = "label") # DAG
+    # ggdag_status(dag.1) # DAG with variable status (exposure/outcome/latent)
+    # ggdag_paths(dag.1, text = FALSE, use_labels = "label") #exposure and outcome must be defined
+    # ggdag_adjustment_set(dag.1, text = FALSE, use_labels = "label") #sets of covariates needed for unbiased estimation
+ ggdag_dconnected(dag.3, text = FALSE, use_labels = "label") +
+  theme_void() +
+  theme(
+    plot.background = element_rect(fill = "white"), #darkgrey
+    plot.title = element_text(color = "black"),
+    plot.subtitle = element_text(color = "black")
+  ) + labs(title = "Directed Acyclic Graph", subtitle = "Effect of Interest: B5.1 <- Alter")
+ 
+# Alter -(-0.3)-> B5.1
+  knitr::kable(summary(lm(B5.1~Alter+FK+B2.1, data = df))$coefficients[1:2,], digits = 4, caption = "lm(B5.1~Alter+FK+B2.1) | Alter: -0.3")
+```
+\normalsize
+
 
 # Missing Patterns
 
