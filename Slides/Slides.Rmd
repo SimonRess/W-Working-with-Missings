@@ -50,7 +50,7 @@ header-includes:
   - |
     \makeatletter
     \def\ps@sectionpage{%
-      \setbeamertemplate{frame footer}{\tiny{\textcolor{beaublue}{Conference 56. Jahrestagung der DGSMP, 2021 | SIMON RESS}}}
+      \setbeamertemplate{frame footer}{\tiny{\textcolor{beaublue}{Workshop Multiple Imputation and subsequent calculations (at hr\&c),  2022 | SIMON RESS}}}
     }
     \addtobeamertemplate{section page}{\thispagestyle{sectionpage}}{}
     \makeatother
@@ -92,11 +92,31 @@ knitr::opts_chunk$set(echo = FALSE)
 # Markdown text sizes: Huge > huge > LARGE > Large > large > normalsize > small > footnotesize > scriptsize > tiny
 #Usage: \tiny
 
+if(!require("dplyr")) install.packages("dplyr")
+library(dplyr)
+
 ```
 
 
 ## Content
 \tableofcontents[]
+
+# Introduction
+**What is this workshop about?**
+
+- Specific methods for working with multiple imputed datasets
+
+**Why are special methods for working with multiple imputed data important?**
+
+- We always want to estimate the true (causal) effect of an event
+
+**Does just using a specific algorithms leads to unbiased estimates?**
+
+- No, there are other effects influencing the bias of an estimate
+
+This workshop therefore follows a **holistic approach**. Based on methods for **calculating unbiased effects** in data without missing values, the different **missing patterns** are then introduced, the effect of different **missing-handling techniques** on the bias is demonstrated and then **multiple imputation** is introduced as a method for reducing the bias.
+
+
 
 # Examplary Data Set
 
@@ -122,7 +142,7 @@ knitr::opts_chunk$set(echo = FALSE)
     FK-->|+2.0|B2.1
     FK-->|+1.5|B5.1
     B2.1-->|+0.2|B5.1
-    Alter-->|-0.30|B5.1
+    Alter-->| -0.30|B5.1
   ", width = "100%", height = "100%") # %>% plotly::save_image(., file = "aa.png")
 ```
 
@@ -157,7 +177,7 @@ head(df,10)
 ```
 
 
-## I. Check whether true effects can be estimated
+## A. Check whether true effects can be estimated
 \scriptsize
 ```{r I-Check-Calculation-of-Effects, echo=FALSE, message=FALSE}
 # Mann -(+0.2)-> FK
@@ -167,12 +187,16 @@ head(df,10)
   knitr::kable(summary(lm(FK~Alter, data = df))$coefficients, digits = 4, caption = "lm(FK~Alter) | Alter: +0.1", format = 'markdown')
 
 # FK -(+2)-> B2.1
-  knitr::kable(summary(lm(B2.1~FK, data = df))$coefficients, digits = 4, caption = "lm(B2.1~FK) | FK: +2", format = 'markdown')
+  knitr::kable(summary(lm(B2.1~FK, data = df))$coefficients, digits = 4, caption = " | FK: +2", format = 'markdown')
 ```
 \normalsize
 
+## A. Evaluation whether true effects was estimated
 
-## II. Check whether true effects can be estimated (!)
+Yes, in all three models the true effect was estimated (taken the confidence interval into account).
+
+
+## B. Check whether true effects can be estimated 
 \scriptsize
 ```{r II-Check-Calculation-of-Effects, echo=FALSE, message=FALSE}
 # FK -(+1.5)-> B5.1
@@ -187,11 +211,88 @@ head(df,10)
 \normalsize
 
 
+## B. Evaluation whether true effects was estimated
+- It is not obvious from the estimates and standard error whether the true effect was calculated
+- Verification by the exact calculation of the confidence interval is needed
+
+
+## B.II Check if confidence interval encloses true effect
+**Recap Confidence Interval**
+A confidence interval is an interval that contains the population parameter with probability $1 − \alpha$. A confidence interval takes on the form:
+$$\overline{X}±t_{α/2,N−1}*S_{\overline{X}}$$
+
+where $t_{α/2,N−1}$ is the (z-)value needed to generate an area of $\alpha/2$ in each tail of a t-distribution with n-1 degrees of freedom and  
+$S_{\overline{X}} = \frac{s}{\sqrt{N}}$ is the standard error of the mean (s=standard deviation).
+<!-- Link to formulars & explaination: https://bookdown.org/logan_kelly/r_practice/p09.html -->
+<!-- Mathematics in R Markdown: https://rpruim.github.io/s341/S19/from-class/MathinRmd.html -->
+<!-- Writing Mathematic Fomulars in Markdown: https://csrgxtu.github.io/2015/03/20/Writing-Mathematic-Fomulars-in-Markdown/ -->
+
+| Z-value (standard deviation) |	p-value (probability) |	Confidence level |
+| --- | --- | --- |
+| < -1,65 oder > +1,65 | < 0,10 | 90% | 
+| < -1,96 oder > +1,96 | < 0,05 | 95% |
+| < -2,58 oder > +2,58 | < 0,01 | 99% | 
+<!--Z/p-value table: https://pro.arcgis.com/de/pro-app/latest/tool-reference/spatial-statistics/what-is-a-z-score-what-is-a-p-value.htm -->
+
+
+## B.II Check if confidence interval encloses true effect (B5.1~FK)
+\scriptsize
+```{r Check-Calculation-of-Effects (B5.1~FK), echo=FALSE, message=FALSE}
+# FK -(+1.5)-> B5.1
+  knitr::kable(summary(lm(B5.1~FK, data = df))$coefficients, digits = 4, caption = "lm(B5.1~FK) | FK: +1.5")
+```
+\normalsize
+
+- **True effect: +1.5**
+- Confidence Interval = $\overline{X}±t_{α/2,N−1}*S_{\overline{X}}$
+- **lower.bound** = `r summary(lm(B5.1~FK, data = df))$coefficients[2,1]` - `r summary(lm(B5.1~FK, data = df))$coefficients[2,2]` * 1.96 = **`r round(summary(lm(B5.1~FK, data = df))$coefficients[2,1] - summary(lm(B5.1~FK, data = df))$coefficients[2,2] * 1.96 ,3)`**
+- **upper.bound** = `r summary(lm(B5.1~FK, data = df))$coefficients[2,1]` + `r summary(lm(B5.1~FK, data = df))$coefficients[2,2]` * 1.96 = **`r round(summary(lm(B5.1~FK, data = df))$coefficients[2,1] + summary(lm(B5.1~FK, data = df))$coefficients[2,2] * 1.96 ,3)`**
+
+-> True effect is **not covered** by the confidence interval
+
+
+## B.II Check if confidence interval encloses true effect (B5.1~B2.1)
+\scriptsize
+```{r Check-Calculation-of-Effects (B5.1~B2.1), echo=FALSE, message=FALSE}
+# B2.1 -(+0.2)-> B5.1
+  knitr::kable(summary(lm(B5.1~B2.1, data = df))$coefficients, digits = 4, caption = "lm(B5.1~B2.1) | B2.1: +0.2")
+```
+\normalsize
+
+- **True effect: +0.2**
+- Confidence Interval = $\overline{X}±t_{α/2,N−1}*S_{\overline{X}}$
+- **lower.bound** = `r summary(lm(B5.1~B2.1, data = df))$coefficients[2,1]` - `r summary(lm(B5.1~B2.1, data = df))$coefficients[2,2]` * 1.96 = **`r round(summary(lm(B5.1~B2.1, data = df))$coefficients[2,1] - summary(lm(B5.1~B2.1, data = df))$coefficients[2,2] * 1.96 ,3)`**
+- **upper.bound** = `r summary(lm(B5.1~B2.1, data = df))$coefficients[2,1]` + `r summary(lm(B5.1~B2.1, data = df))$coefficients[2,2]` * 1.96 = **`r round(summary(lm(B5.1~B2.1, data = df))$coefficients[2,1] + summary(lm(B5.1~B2.1, data = df))$coefficients[2,2] * 1.96 ,3)`**
+
+-> True effect is **not covered** by the confidence interval
+
+
+## B.II Check if confidence interval encloses true effect (B5.1~Alter)
+\scriptsize
+```{r Check-Calculation-of-Effects (B5.1~Alter), echo=FALSE, message=FALSE}
+# Alter -(-0.3)-> B5.1
+  knitr::kable(summary(lm(B5.1~Alter, data = df))$coefficients, digits = 4, caption = "lm(B5.1~Alter) | Alter: -0.3")
+```
+\normalsize
+
+- **True effect: -0.3**
+- Confidence Interval = $\overline{X}±t_{α/2,N−1}*S_{\overline{X}}$
+- **lower.bound** = `r summary(lm(B5.1~Alter, data = df))$coefficients[2,1]` - `r summary(lm(B5.1~Alter, data = df))$coefficients[2,2]` * 1.96 = **`r round(summary(lm(B5.1~Alter, data = df))$coefficients[2,1] - summary(lm(B5.1~Alter, data = df))$coefficients[2,2] * 1.96 ,3)`**
+- **upper.bound** = `r summary(lm(B5.1~Alter, data = df))$coefficients[2,1]` + `r summary(lm(B5.1~Alter, data = df))$coefficients[2,2]` * 1.96 = **`r round(summary(lm(B5.1~Alter, data = df))$coefficients[2,1] + summary(lm(B5.1~Alter, data = df))$coefficients[2,2] * 1.96 ,3)`**
+
+-> True effect is **not covered** by the confidence interval
+
+
+## Brainstroming
+
+<center> **What's the problem? Why can't we estimate the true (causal) effect?** </center>
+
+
 ## Excursus: Modern Causal Analysis
 
-- Satisfaction of the Conditional Independence Assumption (CIA) necessary to estimate true causal effects
-- Meet the CIA using an appropriate set of control variables
-- Choose control variables by a Directed Acyclic Graph (DAG)
+- Satisfaction of the **Conditional Independence Assumption (CIA)** necessary to estimate true causal effects
+- Meet the CIA using an **appropriate set of control variables**
+- Choose control variables by a **Directed Acyclic Graph (DAG)**
 
 
 ## Excursus MCA: DAG (B5.1 <- FK)
@@ -227,8 +328,12 @@ dag.1 <- dagify(B5.1 ~ FK,
  
  # FK -(+1.5)-> B5.1
   knitr::kable(summary(lm(B5.1~FK+B2.1+Alter, data = df))$coefficients[1:2,], digits = 4, caption = "lm(B5.1~FK+B2.1+Alter) | FK: +1.5")
+  
+  #Beta without CIA satisfaction
+  print(paste0("Effect without fulfilling the CIA: ", round(summary(lm(B5.1~FK, data = df))$coefficients[2,1], 4)))
 ```
 \normalsize
+
 
 
 ## Excursus MCA: DAG (B5.1 <- B2.1)
@@ -264,6 +369,10 @@ dag.2 <- dagify(B5.1 ~ FK,
  
  # FK -(+1.5)-> B5.1
   knitr::kable(summary(lm(B5.1~B2.1+FK+Alter, data = df))$coefficients[1:2,], digits = 4, caption = "lm(B5.1~B2.1+FK+Alter) | B2.1: +0.2")
+  
+  #Beta without CIA satisfaction
+  print(paste0("Effect without fulfilling the CIA: ", round(summary(lm(B5.1~B2.1, data = df))$coefficients[2,1], 4)))
+
 ```
 \normalsize
 
@@ -301,21 +410,145 @@ dag.3 <- dagify(B5.1 ~ FK,
  
 # Alter -(-0.3)-> B5.1
   knitr::kable(summary(lm(B5.1~Alter+FK+B2.1, data = df))$coefficients[1:2,], digits = 4, caption = "lm(B5.1~Alter+FK+B2.1) | Alter: -0.3")
+  
+    #Beta without CIA satisfaction
+  print(paste0("Effect without fulfilling the CIA: ", round(summary(lm(B5.1~Alter, data = df))$coefficients[2,1], 4)))
 ```
 \normalsize
 
 
+## Conclusion on the calculation of the unbiased effect
+
+- Even in case of non-missing data the estimation of unbiased estimates is not a sure-fire success 
+- The CIA needs to be satisfied otherwise there will be **always a bias** in the estimates
+- Fulfilling the CIA is possible by deriving an appropriate set of variables from an **DAGs**
+
+
 # Missing Patterns
+
+## Three types of missing patterns
+
+- Missing completely at random (MCAR)
+- Missing Patterns: Missing at random (MAR)
+- Missing Patterns: Missing not at random (MNAR)
+
 
 ## Missing Patterns: Missing completely at random (MCAR)
 
-- Values are randomly missing in the dataset
-  - Missing data values do not relate to any other data
-  - There is no pattern to the actual values of the missing data themselves
+- Missing values are **completely randomly distributed** in the variable of interest
+  - There is no pattern to the actual values of the missing variable themselves
+    - *e.g. higher or lower values are more likely be missing*
+  - Missing data values do not relate to any distribution of another variable
+    - *e.g. woman are more likely to have missing values on income*
+  
 - For instance, when smoking status is not recorded in a random subset of patients
-- This is easy to handle, but unfortunately, data are almost never missing completely at random
+- This missing-type is easy to handle, but unfortunately, data are **almost never** missing completely at random
 
 ## MCAR: Inserting Missing values in data frame
+\scriptsize
+```{r MCAR Inserting Missing values in data frame, echo=TRUE, message=FALSE, fig.width = 8, fig.height = 3.5}
+if(!require(missMethods)) install.packages("missMethods")
+library(missMethods)
+
+set.seed(322)
+
+df.MCAR = delete_MCAR(df, 0.3, "Mann")
+  
+df.MCAR = delete_MCAR(df.MCAR, 0.2, "Alter")
+    
+df.MCAR = delete_MCAR(df.MCAR, 0.25, "FK")
+  
+df.MCAR = delete_MCAR(df.MCAR, 0.15, "B2.1")
+  
+df.MCAR = delete_MCAR(df.MCAR, 0.35, "B5.1")
+```
+\normalsize
+
+
+## MCAR: Check missing pattern (Mann)
+\scriptsize
+```{r MCAR check missing pattern (Mann), echo=FALSE, message=FALSE, warning=FALSE}
+if(!require(Rcmdr)) install.packages("Rcmdr")
+library(Rcmdr)
+
+  paste0("Mean 'Mann' (no missings): ", mean(df$Mann))
+  paste0("Mean 'Mann' (MCAR): ", round(mean(df.MCAR$Mann, na.rm = TRUE),4))
+  
+table(df$Mann, is.na(df.MCAR$Mann))
+
+colPercents(table(df$Mann, is.na(df.MCAR$Mann)))
+```
+\normalsize
+
+
+## MCAR: Check missing pattern (Alter)
+\scriptsize
+```{r MCAR check missing pattern (Alter), echo=FALSE, message=FALSE, warning=FALSE}
+
+  paste0("Mean 'Alter' (no missings): ", mean(df$Alter))
+  paste0("Mean 'Alter' (MCAR): ", round(mean(df.MCAR$Alter, na.rm = TRUE),4))
+  
+table(df$Alter, is.na(df.MCAR$Alter))
+
+colPercents(table(df$Alter, is.na(df.MCAR$Alter)))
+```
+\normalsize
+
+
+## MCAR: Check missing pattern (FK)
+\scriptsize
+```{r MCAR check missing pattern (FK), echo=FALSE, message=FALSE, warning=FALSE}
+
+  paste0("Mean 'FK' (no missings): ", mean(df$FK))
+  paste0("Mean 'FK' (MCAR): ", round(mean(df.MCAR$FK, na.rm = TRUE),4))
+
+table(df$FK, is.na(df.MCAR$FK))
+
+colPercents(table(df$FK, is.na(df.MCAR$FK)))
+```
+\normalsize
+
+
+## MCAR: Check missing pattern (FK II)
+\scriptsize
+```{r MCAR check missing pattern (FK II), echo=TRUE, message=FALSE, warning=FALSE}
+  #define standard error of mean function
+    std.error <- function(x) sd(x[!is.na(x)])/sqrt(length(x[!is.na(x)]))
+  
+  #Calculate the confidence interval
+    mean(df.MCAR$FK, na.rm = TRUE) + 1.96*std.error(df.MCAR$FK) # upper.bound
+    mean(df.MCAR$FK, na.rm = TRUE) - 1.96*std.error(df.MCAR$FK) # lower.bound
+```
+
+
+## MCAR: Check missing pattern (B2.1)
+\scriptsize
+```{r MCAR check missing pattern (B2.1), echo=FALSE, message=FALSE, warning=FALSE}
+
+  paste0("Mean 'B2.1' (no missings): ", mean(B2.1))
+  paste0("Mean 'B2.1' (MCAR): ", round(mean(df.MCAR$B2.1, na.rm = TRUE),4))
+  
+
+table(df$B2.1, is.na(df.MCAR$B2.1))
+
+colPercents(table(df$B2.1, is.na(df.MCAR$B2.1)))
+```
+\normalsize
+
+
+## MCAR: Check missing pattern (B5.1)
+\scriptsize
+```{r MCAR check missing pattern (B5.1), echo=FALSE, message=FALSE, warning=FALSE}
+
+  paste0("Mean 'B5.1' (no missings): ", mean(B5.1))
+  paste0("Mean 'B5.1' (MCAR): ", round(mean(df.MCAR$B5.1, na.rm = TRUE),4))
+  
+
+table(df$B5.1, is.na(df.MCAR$B5.1))
+
+colPercents(table(df$B5.1, is.na(df.MCAR$B5.1)))
+```
+\normalsize
 
 
 ## Missing Patterns: Missing at random (MAR)
@@ -323,105 +556,764 @@ dag.3 <- dagify(B5.1 ~ FK,
 - Confusing and would be better stated as *missing conditionally at random*
 - Missing data do have a relationship with other variables in the dataset
   - Whether a value is missing or not depends on other variables
-- The actual values that are missing are random
+  - *e.g. woman are more likely to have missing values on income*
+- The actual shaping of the missing-values are random
+  - *e.g. the missing income data of woman are not especially low or high, but even distributed*
 - For example, smoking status is not documented in female patients because the doctor was too shy to ask
+
+
+## MAR: Inserting Missing values in data frame
+\scriptsize
+```{r MAR Inserting Missing values in data frame, echo=TRUE, message=FALSE, fig.width = 8, fig.height = 3.5}
+if(!require(missMethods)) install.packages("missMethods")
+library(missMethods)
+
+
+# Generate MAR values using a censoring mechanism. This leads to a missing value in “X”, if the y-value is below the 30 % quantile of “Y”:
+  # ds_mar <- delete_MAR_censoring(ds_comp, 0.3, "X", cols_ctrl = "Y")
+
+#The censoring mechanism is a rather strong form of MAR. A function that allows to control the strength of the MAR mechanism is delete_MAR_1_to_x. The strength is controlled through the argument x: the bigger x, the stronger the simulated MAR mechanism:
+  # ds_mar <- delete_MAR_1_to_x(ds_comp, 0.3, "X", cols_ctrl = "Y", x = 2)
+
+set.seed(322)
+
+df.MAR = delete_MAR_1_to_x(df, 0.3, "Mann", cols_ctrl = "Alter", x = 2)
+  
+df.MAR = delete_MAR_1_to_x(df.MAR, 0.4, "Alter", cols_ctrl = "FK", x = 3)
+    
+df.MAR = delete_MAR_1_to_x(df.MAR, 0.7, "FK", cols_ctrl = "B2.1", x = 2.5)
+  
+df.MAR = delete_MAR_1_to_x(df.MAR, 0.15, "B2.1", cols_ctrl = "B5.1", x = 2)
+  
+df.MAR = delete_MCAR(df.MAR, 0.30, "B5.1")
+```
+\normalsize
+
+
+## MAR: Check missing pattern (Mann)
+\scriptsize
+```{r MAR check missing pattern (Mann), echo=FALSE, message=FALSE, warning=FALSE}
+if(!require(Rcmdr)) install.packages("Rcmdr")
+library(Rcmdr)
+
+  paste0("Mean 'Mann' (no missings): ", mean(df$Mann))
+  paste0("Mean 'Mann' (MAR): ", round(mean(df.MAR$Mann, na.rm = TRUE),4))
+  
+table(df$Mann, is.na(df.MAR$Mann))
+
+colPercents(table(df$Mann, is.na(df.MAR$Mann)))
+```
+\normalsize
+
+
+## MAR: Check missing pattern (Alter)
+\scriptsize
+```{r MAR check missing pattern (Alter), echo=FALSE, message=FALSE, warning=FALSE}
+if(!require(Rcmdr)) install.packages("Rcmdr")
+library(Rcmdr)
+
+  paste0("Mean 'Alter' (no missings): ", mean(df$Alter))
+  paste0("Mean 'Alter' (MAR): ", round(mean(df.MAR$Alter, na.rm = TRUE),4))
+  
+table(df$Alter, is.na(df.MAR$Alter))
+
+colPercents(table(df$Alter, is.na(df.MAR$Alter)))
+```
+\normalsize
+
+
+## MAR: Check missing pattern (FK)
+\scriptsize
+```{r MAR check missing pattern (FK), echo=FALSE, message=FALSE, warning=FALSE}
+if(!require(Rcmdr)) install.packages("Rcmdr")
+library(Rcmdr)
+
+  paste0("Mean 'FK' (no missings): ", mean(df$FK))
+  paste0("Mean 'FK' (MAR): ", round(mean(df.MAR$FK, na.rm = TRUE),4))
+  
+table(df$FK, is.na(df.MAR$FK))
+
+colPercents(table(df$FK, is.na(df.MAR$FK)))
+```
+\normalsize
+
+
+## MAR: Check missing pattern (B2.1)
+\scriptsize
+```{r MAR check missing pattern (B2.1), echo=FALSE, message=FALSE, warning=FALSE}
+if(!require(Rcmdr)) install.packages("Rcmdr")
+library(Rcmdr)
+
+  paste0("Mean 'B2.1' (no missings): ", mean(df$B2.1))
+  paste0("Mean 'B2.1' (MAR): ", round(mean(df.MAR$B2.1, na.rm = TRUE),4))
+  
+table(df$FK, is.na(df.MAR$FK))
+
+colPercents(table(df$B2.1, is.na(df.MAR$B2.1)))
+```
+\normalsize
+
+
+## MAR: Check missing pattern (B5.1)
+- Due to estimation reasons B5.1 is MCAR
+- Missing patterns is the as shown before
+
+
+
+
 
 
 ## Missing Patterns: Missing not at random (MNAR)
 
-- The pattern of missingness is related to other variables in the dataset 
-- In addition, the values of the missing data are not random
-  - Whether a value is missing or not depends on other variables
+- The pattern of missingness is related to other variables in the dataset
+- In addition, the shaping of the missing-values are **NOT** random
+  - Whether a value is missing or not depends on its shaping
+  - *e.g. higher or lower incomes are more likely be missing* 
 - For example, when smoking status is not recorded in patients admitted as an emergency, who are also more likely to have worse outcomes from surgery
 
+## MNAR: Inserting Missing values in data frame
+\scriptsize
+```{r MNAR Inserting Missing values in data frame, echo=TRUE, message=FALSE, fig.width = 8, fig.height = 3.5}
+if(!require(missMethods)) install.packages("missMethods")
+library(missMethods)
 
 
-## Main Repos
+# Generate MNAR values using a censoring mechanism. This leads to a missing value in “X”, if the x-value is below the 30 % quantile of “X”:
+  #ds_mnar <- delete_MNAR_censoring(ds_comp, 0.3, "X")
 
-- [Official GitHub Repo of Metropolis](https://github.com/matze/mtheme)
-  (formerly mtheme); older version in TeXLive 
-- [My GitHub Repo for a local Ubuntu package of Metropolis](https://github.com/eddelbuettel/pkg-latex-metropolis) -- formerly mtheme
-- [Manuel](https://mirror.physik.tu-berlin.de/pub/CTAN/macros/latex/contrib/beamer-contrib/themes/metropolis/doc/metropolistheme.pdf)
+# Create missing not at random (MNAR) values using MNAR1:x in a data frame
+  #delete_MNAR_1_to_x(ds, 0.2, "X", x = 3)
 
-## Slide with Bullets
+set.seed(322)
 
-- Bullet 1
-- Bullet 2
-- Bullet 3
+df.MNAR = delete_MNAR_1_to_x(df, 0.3, "Mann", x = 3)
+  
+df.MNAR = delete_MNAR_1_to_x(df.MNAR, 0.4, "Alter", x = 3.5)
+    
+df.MNAR = delete_MNAR_1_to_x(df.MNAR, 0.45, "FK", x = 2)
+  
+df.MNAR = delete_MNAR_1_to_x(df.MNAR, 0.35, "B2.1", x = 2.5)
+  
+df.MNAR = delete_MNAR_1_to_x(df.MNAR, 0.30, "B5.1", x = 4)
+```
+\normalsize
 
-# Slide with R Output
 
-```{r cars, echo = TRUE}
-summary(cars)
+## MNAR: Check missing pattern (Mann)
+\scriptsize
+```{r MNAR check missing pattern (Mann), echo=FALSE, message=FALSE, warning=FALSE}
+if(!require(Rcmdr)) install.packages("Rcmdr")
+library(Rcmdr)
+
+  paste0("Mean 'Mann' (no missings): ", mean(df$Mann))
+  paste0("Mean 'Mann' (MNAR): ", round(mean(df.MNAR$Mann, na.rm = TRUE),4))
+  
+table(df$Mann, is.na(df.MNAR$Mann))
+
+colPercents(table(df$Mann, is.na(df.MNAR$Mann)))
+```
+\normalsize
+
+
+## MNAR: Check missing pattern (Alter)
+\scriptsize
+```{r MNAR check missing pattern (Alter), echo=FALSE, message=FALSE, warning=FALSE}
+if(!require(Rcmdr)) install.packages("Rcmdr")
+library(Rcmdr)
+
+  paste0("Mean 'Alter' (no missings): ", mean(df$Alter))
+  paste0("Mean 'Alter' (MNAR): ", round(mean(df.MNAR$Alter, na.rm = TRUE),4))
+  
+table(df$Alter, is.na(df.MNAR$Alter))
+
+colPercents(table(df$Alter, is.na(df.MNAR$Alter)))
+```
+\normalsize
+
+
+## MNAR: Check missing pattern (FK)
+\scriptsize
+```{r MNAR check missing pattern (FK), echo=FALSE, message=FALSE, warning=FALSE}
+if(!require(Rcmdr)) install.packages("Rcmdr")
+library(Rcmdr)
+
+  paste0("Mean 'FK' (no missings): ", mean(df$FK))
+  paste0("Mean 'FK' (MNAR): ", round(mean(df.MNAR$FK, na.rm = TRUE),4))
+  
+table(df$FK, is.na(df.MNAR$FK))
+
+colPercents(table(df$FK, is.na(df.MNAR$FK)))
+```
+\normalsize
+
+
+## MNAR: Check missing pattern (B2.1)
+\scriptsize
+```{r MNAR check missing pattern (B2.1), echo=FALSE, message=FALSE, warning=FALSE}
+if(!require(Rcmdr)) install.packages("Rcmdr")
+library(Rcmdr)
+
+  paste0("Mean 'B2.1' (no missings): ", mean(df$B2.1))
+  paste0("Mean 'B2.1' (MNAR): ", round(mean(df.MNAR$B2.1, na.rm = TRUE),4))
+  
+table(df$B2.1, is.na(df.MNAR$B2.1))
+
+colPercents(table(df$B2.1, is.na(df.MNAR$B2.1)))
+```
+\normalsize
+
+
+## MNAR: Check missing pattern (B5.1)
+\scriptsize
+```{r MNAR check missing pattern (B5.1), echo=FALSE, message=FALSE, warning=FALSE}
+if(!require(Rcmdr)) install.packages("Rcmdr")
+library(Rcmdr)
+
+  paste0("Mean 'B5.1' (no missings): ", mean(df$B5.1))
+  paste0("Mean 'B5.1' (MNAR): ", round(mean(df.MNAR$B5.1, na.rm = TRUE),4))
+  
+table(df$B5.1, is.na(df.MNAR$B5.1))
+
+colPercents(table(df$B5.1, is.na(df.MNAR$B5.1)))
+```
+\normalsize
+
+
+
+# Missing data handling techniques
+
+## Overview of missing data handling techniques
+
+**Traditional Methods**
+
+- Delete Rows with Missing Values (list-wise deletion)
+- Mean/Median Imputation
+- Regression Imputation
+
+**Modern Methods**
+
+- Multiple Imputation
+
+\scriptsize
+| Missingness | List-wise deletion | Mean/Median Imputation | Regression Imputation | Multiple Imputation |
+| --- | --- | --- | --- | --- |
+| MCAR | unbiased estimate \\ (biases SE) | unbiased estimate \\ (biases SE) | unbiased estimate \\ (biases SE) | unbiased estimate \\ (**unbiased** SE) |
+| MAR | biased estimate \\ (biases SE) | biased estimate \\ (biases SE) | unbiased estimate \\ (biases SE) | unbiased estimate \\ (**unbiased** SE) |
+| MNAR | biased estimate \\ (biases SE) | biased estimate \\ (biases SE) | unbiased estimate \\ (biases SE) | unbiased estimate \\ (**unbiased** SE) |
+\normalsize
+
+
+## MCAR: list-wise deletion (Point estimate Mann) CODE
+\scriptsize
+```{r list-wise deletion (Mann) code, echo=TRUE, eval=FALSE, message=FALSE, warning=FALSE}
+# Point estimates
+  paste0("Mean 'Mann' (no missings): ", mean(df$Mann))
+  paste0("Mean 'Mann' (MCAR): ", round(mean(df.MCAR$Mann, na.rm = TRUE),4))
+  
+  #define standard error of mean function
+    std.error <- function(x) sd(x[!is.na(x)])/sqrt(length(x[!is.na(x)]))
+  
+  #Calculate the confidence interval
+    paste0("upper.bound: ", round(mean(df.MCAR$Mann, na.rm = TRUE) + 1.96*
+                                    std.error(df.MCAR$Mann), 4)) # upper.bound
+    paste0("lower.bound: ", round(mean(df.MCAR$Mann, na.rm = TRUE) - 1.96*
+                                    std.error(df.MCAR$Mann), 4)) # lower.bound
+```
+\normalsize
+
+
+## MCAR: list-wise deletion (Point estimate Mann)
+**Full Dataset (true coefficients)**
+\scriptsize
+```{r MCAR list-wise deletion (Mann) full, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+# Point estimates
+  paste0("Mean 'Mann' (no missings): ", mean(df$Mann))
+  
+  #define standard error of mean function
+    std.error <- function(x) sd(x[!is.na(x)])/sqrt(length(x[!is.na(x)]))
+  
+  #Calculate the confidence interval
+    paste0("upper.bound: ", round(mean(df$Mann, na.rm = TRUE) + 1.96*std.error(df$Mann), 4)) # upper.bound
+    paste0("lower.bound: ", round(mean(df$Mann, na.rm = TRUE) - 1.96*std.error(df$Mann), 4)) # lower.bound
+```
+\normalsize
+
+**Missing Dataset **
+\scriptsize
+```{r MCAR list-wise deletion (Mann) miss, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+# Point estimates
+  paste0("Mean 'Mann' (MCAR): ", round(mean(df.MCAR$Mann, na.rm = TRUE),4))
+  
+  #define standard error of mean function
+    std.error <- function(x) sd(x[!is.na(x)])/sqrt(length(x[!is.na(x)]))
+  
+  #Calculate the confidence interval
+    paste0("upper.bound: ", round(mean(df.MCAR$Mann, na.rm = TRUE) + 1.96*std.error(df.MCAR$Mann), 4)) # upper.bound
+    paste0("lower.bound: ", round(mean(df.MCAR$Mann, na.rm = TRUE) - 1.96*std.error(df.MCAR$Mann), 4)) # lower.bound
+```
+\normalsize
+
+**Evaluation**: Unbiased Estimate (**biases** SE \& Confidence Interval)
+
+
+
+## MCAR: Mean/Median Imputation (Point estimate Mann) CODE
+\scriptsize
+```{r Mean/Median Imputation (Mann) code, echo=TRUE, eval=FALSE, message=FALSE, warning=FALSE}
+# Mean Imputation
+  df.MCAR.Mean = df.MCAR
+  df.MCAR.Mean$Mann <- ifelse(is.na(df.MCAR$Mann), mean(df.MCAR$Mann, na.rm = TRUE), 
+                              df.MCAR$Mann)
+
+# Point estimates
+  paste0("Mean 'Mann' (no missings): ", mean(df$Mann))
+  paste0("Mean 'Mann' (MCAR): ", round(mean(df.MCAR.Mean$Mann, na.rm = TRUE),4))
+  
+  #define standard error of mean function
+    std.error <- function(x) sd(x[!is.na(x)])/sqrt(length(x[!is.na(x)]))
+  
+  #Calculate the confidence interval
+    paste0("upper.bound: ", round(mean(df.MCAR.Mean$Mann, na.rm = TRUE) + 1.96*
+                                    std.error(df.MCAR.Mean$Mann), 4)) # upper.bound
+    paste0("lower.bound: ", round(mean(df.MCAR.Mean$Mann, na.rm = TRUE) - 1.96*
+                                    std.error(df.MCAR.Mean$Mann), 4)) # lower.bound
+```
+\normalsize
+
+
+## MCAR: Mean/Median Imputation (Point estimate Mann)
+**Full Dataset (true coefficients)**
+\scriptsize
+```{r MCAR Mean/Median Imputation (Mann) full, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+# Point estimate
+  paste0("Mean 'Mann' (no missings): ", mean(df$Mann))
+  
+  #define standard error of mean function
+    std.error <- function(x) sd(x[!is.na(x)])/sqrt(length(x[!is.na(x)]))
+  
+  #Calculate the confidence interval
+    paste0("upper.bound: ", round(mean(df$Mann, na.rm = TRUE) + 1.96*std.error(df$Mann), 4)) # upper.bound
+    paste0("lower.bound: ", round(mean(df$Mann, na.rm = TRUE) - 1.96*std.error(df$Mann), 4)) # lower.bound
+```
+\normalsize
+
+**Missing Dataset **
+\scriptsize
+```{r MCAR Mean/Median Imputation (Mann) miss, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+# Mean Imputation
+  df.MCAR.Mean = df.MCAR
+  df.MCAR.Mean$Mann <- ifelse(is.na(df.MCAR$Mann), mean(df.MCAR$Mann, na.rm = TRUE), df.MCAR$Mann)
+
+# Point estimates
+  paste0("Mean 'Mann' (MCAR): ", round(mean(df.MCAR.Mean$Mann, na.rm = TRUE),4))
+  
+  #define standard error of mean function
+    std.error <- function(x) sd(x[!is.na(x)])/sqrt(length(x[!is.na(x)]))
+  
+  #Calculate the confidence interval
+    paste0("upper.bound: ", round(mean(df.MCAR.Mean$Mann, na.rm = TRUE) + 1.96*std.error(df.MCAR.Mean$Mann), 4)) # upper.bound
+    paste0("lower.bound: ", round(mean(df.MCAR.Mean$Mann, na.rm = TRUE) - 1.96*std.error(df.MCAR.Mean$Mann), 4)) # lower.bound
+```
+\normalsize
+
+**Evaluation**: Unbiased Estimate (**biases** SE \& Confidence Interval)
+
+
+
+## Excursus: Rules for MI inference ("Rubin's rules")
+
+[*Literature-Link*](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2727536/)
+
+**Combining parameter estimates**
+
+For a single population parameter of interest, Q, e.g. a regression coefficient, the MI overall point estimate is the average of the **m**-estimates of Q from the imputed datasets:
+$\overline{Q}=\frac{1}{m} \sum_{i=1}^{m} \hat{Q}$
+
+The **standard error** is calculated with the **total variance**(TIV), which is uses the **within imputation variance**(WIV) and the **between imputation variance**(BIV):
+
+$WIV = \frac{1}{m} \sum_{i=1}^{m} σ^{2}$, where $σ^{2}=\frac{\sum(X_i-μ)^{2}}{N}$
+
+$BIV = \frac{1}{m} \sum_{i=1}^{m}(\hat{Q}_i - \overline{Q})$
+
+$TIV = WIV + (1+ \frac{1}{m})BIW$
+
+Now the standard error is calculated by $SD = \sqrt{TIV}$ and $SE = \frac{SD}{\sqrt{N/m}}$
+
+
+## Testing "Rubin's rules" code
+\tiny
+```{r Testing Rubins rules code, echo=TRUE, eval=F, message=FALSE, warning=FALSE}
+#Create artificial mi-dataset (no missings)
+  df.mi = rbind(df,df,df,df,df) %>% mutate(mi_id = rep(1:5, each = 5000))
+  n_mi = length(unique(df.mi$mi_id))
+#Calculate and compare point-estimates
+  round(mean(df$Mann),4)
+  round(mean(df.mi$Mann),4)
+#Calculate and compare standard errors & confidence intervals
+  #1.Step: Calculate the total variance by the "within imputation variance" and the "between imputation variance"
+  #2.Step: Calculate the SE from the "total variance"
+    WIV = df.mi %>% group_by(mi_id) %>% summarise(var = var(Mann)) %>% summarise(var = mean(var)) %>% .[[1]]
+    
+    BIV = df.mi %>% group_by(mi_id) %>% summarise(mean = mean(Mann)) %>% mutate(diff.square = (mean - colMeans(.[2]))^2) %>%
+      summarise(B = mean(diff.square)) %>% .[[1]]
+    
+    TIV = WIV+(1+1/5)*BIV
+    SD = sqrt(TIV)
+    SE = SD/sqrt(nrow(df.mi)/5)
+      
+  # Alternative: directly use SE as within-component
+    W = df.mi %>% group_by(mi_id) %>% summarise(std.error = sd(Mann[!is.na(Mann)])/sqrt(length(Mann[!is.na(Mann)]))) %>%
+      summarise(std.error = mean(std.error)) %>%
+      .[[1]]
+    
+    B = df.mi %>% group_by(mi_id) %>% summarise(mean = mean(Mann)) %>% mutate(diff.square = (mean - colMeans(.[2]))^2) %>%
+      summarise(B = mean(diff.square)) %>% .[[1]]
+    SE.short = W+(1+1/n_mi)*B
+
+    
+  #Alternative: Neglect between-component
+    #define standard error of mean function
+      mi_std.error <- function(x) sd(x[!is.na(x)])/sqrt(length(x[!is.na(x)])/n_mi) # UNbiased!!!!
+  
+  #Define standard error without considering MI-structure (WRONG)
+    std.error <- function(x) sd(x[!is.na(x)])/sqrt(length(x[!is.na(x)])) #Biased!!!!
+```
+\normalsize
+
+## Testing "Rubin's rules" code
+**Mean Calculation:**
+```{r Testing Rubins rules, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+#Create artificial mi-dataset (no missings)
+  df.mi = rbind(df,df,df,df,df) %>% mutate(mi_id = rep(1:5, each = 5000))
+  n_mi = length(unique(df.mi$mi_id))
+
+#Calculate and compare point-estimates
+  paste0("Mean (Full-Dataset): ", round(mean(df$Mann),4))
+  paste0("Mean (MI-Dataset): ", round(mean(df.mi$Mann),4))
 ```
 
-## Slide with Plot
+**SE Calculation:**
+```{r Testing Rubins rules 2, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+#Calculate and compare standard errors & confidence intervals
 
-```{r pressure}
-plot(pressure)
+  #Literature: 
+    # - 2004 - Rubin DB. Multiple Imputation for Nonresponse in Surveys. New York: John Wiley and Sons; 
+    # - 2009.BMC Med Res Methodl - Marshall et al - Combining estimates of interest in prognostic modelling studies after multiple imputation: current practice and guidelines
+  
+  #1.Step: Calculate the total variance by the "within imputation variance" and the "between imputation variance"
+  #2.Step: Calculate the SE from the "total variance"
+    WIV = df.mi %>%
+      group_by(mi_id) %>%
+      summarise(var = var(Mann)) %>%
+      summarise(var = mean(var)) %>%
+      .[[1]]
+    
+    BIV = df.mi %>%
+      group_by(mi_id) %>%
+      summarise(mean = mean(Mann)) %>%
+      mutate(diff.square = (mean - colMeans(.[2]))^2) %>%
+      summarise(B = mean(diff.square)) %>%
+      .[[1]]
+    
+    TIV = WIV+(1+1/5)*BIV
+    
+    SD = sqrt(TIV)
+    SE = SD/sqrt(nrow(df.mi)/5)
+    
+    
+    #Define function for se-calculation
+      mi_se = function(data, var, mi_id) {
+        WIV = data %>%
+          #group_by(eval(parse(text =paste0("`",mi_id,"`")))) %>%
+          group_by(eval(parse(text =mi_id))) %>%
+          summarise(variance = var(eval(parse(text=var)))) %>%
+          summarise(var = mean(variance)) %>%
+          .[[1]]
+        
+        BIV = data %>%
+          #group_by(eval(parse(text =paste0("`",mi_id,"`")))) %>%
+          group_by(eval(parse(text =mi_id))) %>%
+          summarise(mean = mean(eval(parse(text=var)))) %>%
+          mutate(diff.square = (mean - colMeans(.[2]))^2) %>%
+          summarise(B = mean(diff.square)) %>%
+          .[[1]]
+        
+        TIV = WIV+(1+1/length(unique(data[,mi_id])))*BIV
+        
+        SD = sqrt(TIV)
+        SE = SD/sqrt(nrow(data)/length(unique(data[,mi_id])))
+        return(SE)
+      }
+  
+  # Alternative: directly use SE as within-component
+    W = df.mi %>%
+      group_by(mi_id) %>%
+      summarise(std.error = sd(Mann[!is.na(Mann)])/sqrt(length(Mann[!is.na(Mann)]))) %>%
+      summarise(std.error = mean(std.error)) %>%
+      .[[1]]
+    
+    B = df.mi %>%
+      group_by(mi_id) %>%
+      summarise(mean = mean(Mann)) %>%
+      mutate(diff.square = (mean - colMeans(.[2]))^2) %>%
+      summarise(B = mean(diff.square)) %>%
+      .[[1]]
+    
+    SE.short = W+(1+1/n_mi)*B
+
+  #Alternative: Neglect between-component
+    #define standard error of mean function
+      mi_std.error <- function(x) sd(x[!is.na(x)])/sqrt(length(x[!is.na(x)])/n_mi) # UNbiased!!!!
+  
+  #Comparison SEs
+    #define standard error of mean function (WRONG)
+    std.error <- function(x) sd(x[!is.na(x)])/sqrt(length(x[!is.na(x)])) #Biased!!!!
+  
+    paste0("SE (Not considering MI-structure): ", std.error(df.mi$Mann))
+    paste0("SE (No between effect): ", mi_std.error(df.mi$Mann))
+    paste0("SE (Rubin's rule, SE indead of VAR): ", SE.short)
+    paste0("SE (Rubin's rule): ", mi_se(df.mi,"Mann"))
+  
+  #Comparison CIs
+#    round(mean(df.mi$Mann) - 1.96* std.error(df.mi$Mann), 4)
+#    round(mean(df.mi$Mann) + 1.96* std.error(df.mi$Mann), 4)
+    
+#    round(mean(df.mi$Mann) - 1.96* mi_std.error(df.mi$Mann), 4)
+#    round(mean(df.mi$Mann) + 1.96* mi_std.error(df.mi$Mann), 4)
+    
+#    round(mean(df.mi$Mann) - 1.96* SE, 4)
+#    round(mean(df.mi$Mann) + 1.96* SE, 4)
+    
+#    round(mean(df.mi$Mann) - 1.96* mi_se(df.mi,"Mann"), 4)
+#    round(mean(df.mi$Mann) + 1.96* mi_se(df.mi,"Mann"), 4)
+  
+#    df.mi.list = list(df,df,df,df,df)
+#    with(df.mi.list, t.test(Mann, conf.level = 0.95))
 ```
 
 
+## MCAR: Multiple Imputation (Point estimate Mann) CODE
+\scriptsize
+\tiny
+```{r Multiple Imputation (Mann) code, echo=TRUE, eval=FALSE, message=FALSE, warning=FALSE}
+if(!require(mice)) install.packages("mice")
+library(mice)
 
-## Two column layout
-
-Here is some text above which goes over to whole slide
-
-<!-- -------------------------- -->
-<!-- Start of two column layout -->
-
-:::::::::::::: {.columns}
-::: {.column width="50%"}
-
-```{r AirPassengers}
-plot(AirPassengers)
+# Multiple Imputation
+  df.MCAR.MI <- mice(df.MCAR,m=5,maxit=50,meth='pmm',seed=500, print=FALSE) # Object of mice class, can be used with mice-specific command
+  df.MCAR.MI <- complete(df.MCAR.MI, 'long') # create dataframe of the n-imputed datasets
+  
+# Point estimates
+  paste0("Mean 'Mann' (MCAR): ", round(mean(df.MCAR.MI$Mann),4))
+  
+#Define function for SE-calculation
+  mi_se = function(data, var, mi_id) {
+    WIV = data %>%
+      group_by(eval(parse(text =mi_id))) %>%
+      summarise(variance = var(eval(parse(text=var)))) %>%
+      summarise(var = mean(variance)) %>%
+      .[[1]]
+    BIV = data %>%
+      group_by(eval(parse(text =mi_id))) %>%
+      summarise(mean = mean(eval(parse(text=var)))) %>%
+      mutate(diff.square = (mean - colMeans(.[2]))^2) %>%
+      summarise(B = mean(diff.square)) %>%
+      .[[1]]
+    TIV = WIV+(1+1/length(unique(data[,mi_id])))*BIV
+    SD = sqrt(TIV)
+    SE = SD/sqrt(nrow(data)/length(unique(data[,mi_id])))
+    return(SE)
+  }
+  
+#Using the function
+  mi_se(df.mi,"Mann", "mi_id")
 ```
-
-:::
-::: {.column width="50%"}
-
-- Description of plot
-- Second point
-
-:::
-::::::::::::::
-
-<!-- End of two column layout -->
-<!-- ------------------------ -->
+\normalsize
 
 
-and here some text below which goes over to whole slide
-
-
-<!-- Create new page without title -->
-_ _ _  
-
-\LARGE Breakout page
-
-# Figures caption
-
-```{r, fig.align="center", out.width = '80%', fig.cap="Figure: Here is a really important caption."}
-#Alternatives to fig.width & fig.height: out.width = '100%
-knitr::include_graphics("Slides_files/RUB.jpg")
+## MCAR: Multiple Imputation (Point estimate Mann) 
+**Full Dataset (true coefficients)**
+\scriptsize
+```{r MCAR Multiple Imputation (Mann) full, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+# Point estimate
+  paste0("Mean 'Mann' (no missings): ", mean(df$Mann))
+  
+  #define standard error of mean function
+    std.error <- function(x) sd(x[!is.na(x)])/sqrt(length(x[!is.na(x)])) 
+  
+  #Calculate the confidence interval
+    paste0("upper.bound: ", round(mean(df$Mann, na.rm = TRUE) + 1.96*std.error(df$Mann), 4)) # upper.bound
+    paste0("lower.bound: ", round(mean(df$Mann, na.rm = TRUE) - 1.96*std.error(df$Mann), 4)) # lower.bound
 ```
+\normalsize
 
-## Using LaTeX Parts: Blocks
+**Missing Dataset **
+\scriptsize
+```{r MCAR Multiple Imputation (Mann) miss wrong, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+if(!require(mice)) install.packages("mice")
+library(mice)
 
-As one example of falling back into \LaTeX, consider the example of
-three different block environments are pre-defined and may be styled
-with an optional background color.
+# Multiple Imputation
+  df.MCAR.MI <- mice(df.MCAR,m=5,maxit=50,meth='pmm',seed=500, print=FALSE) # Object of mice class, can be used with mice-specific command
+  df.MCAR.MI <- complete(df.MCAR.MI, 'long') # create dataframe of the n-imputed datasets
 
-<!-- this sets the background -->
-\metroset{block=fill} 
+# Point estimates
+  mean.df.MCAR.MI = df.MCAR.MI %>% summarise(mean = mean(Mann)) %>% summarise(mean = mean(mean)) %>% .[[1]]
+  paste0("Mean 'Mann' (MCAR): ", round(mean.df.MCAR.MI,4))
+  
+  #define standard error of mean function (WRONG)
+    std.error <- function(x) sd(x[!is.na(x)])/sqrt(length(x[!is.na(x)])) #Biased!!!!
+  
+  #Calculate the confidence interval (wrong way)
+    paste0("upper.bound (wrong): ", round(mean(df.MCAR.MI$Mann) + 1.96* std.error(df.MCAR.MI$Mann), 4)) # upper.bound
+    paste0("lower.bound (wrong): ", round(mean(df.MCAR.MI$Mann) - 1.96* std.error(df.MCAR.MI$Mann), 4)) # lower.bound
+  
+  #Calculate the confidence interval (correct)
+    #Define function for se-calculation
+      mi_se = function(data, var, mi_id) {
+        WIV = data %>%
+          group_by(eval(parse(text=mi_id))) %>%
+          summarise(variance = var(eval(parse(text=var)))) %>%
+          summarise(var = mean(variance)) %>%
+          .[[1]]
+        
+        BIV = data %>%
+          group_by(eval(parse(text=mi_id))) %>%
+          summarise(mean = mean(eval(parse(text=var)))) %>%
+          mutate(diff.square = (mean - colMeans(.[2]))^2) %>%
+          summarise(B = mean(diff.square)) %>%
+          .[[1]]
+        
+        TIV = WIV+(1+1/length(unique(data[,mi_id])))*BIV
+        
+        SD = sqrt(TIV)
+        SE = SD/sqrt(nrow(data)/length(unique(data[,mi_id])))
+        return(SE)
+      }
+        
+      
+    paste0("upper.bound (true): ", round(mean(df.MCAR.MI$Mann) + 1.96* mi_se(df.MCAR.MI,"Mann", ".imp"), 4)) # upper.bound
+    paste0("lower.bound (true): ", round(mean(df.MCAR.MI$Mann) - 1.96* mi_se(df.MCAR.MI,"Mann", ".imp"), 4)) # lower.bound
+```
+\normalsize
 
-\begin{block}{Default}
-  Block content.
-\end{block}
+**Evaluation**: Unbiased Estimate (unbiases SE \& Confidence Interval)
 
-\begin{alertblock}{Alert}
-  Block content.
-\end{alertblock}
 
-\begin{exampleblock}{Example}
-  Block content.
-\end{exampleblock}
+
+
+
+
+
+## MAR: Multiple Imputation (Point estimate Mann) 
+**Full Dataset (true coefficients)**
+\scriptsize
+```{r MAR Multiple Imputation (Mann) full, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+# Point estimate
+  paste0("Mean 'Mann' (no missings): ", mean(df$Mann))
+  
+  #define standard error of mean function
+    std.error <- function(x) sd(x[!is.na(x)])/sqrt(length(x[!is.na(x)])) 
+  
+  #Calculate the confidence interval
+    paste0("upper.bound: ", round(mean(df$Mann, na.rm = TRUE) + 1.96*std.error(df$Mann), 4)) # upper.bound
+    paste0("lower.bound: ", round(mean(df$Mann, na.rm = TRUE) - 1.96*std.error(df$Mann), 4)) # lower.bound
+```
+\normalsize
+
+**Missing Dataset **
+\scriptsize
+```{r MAR Multiple Imputation (Mann) miss wrong, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+if(!require(mice)) install.packages("mice")
+library(mice)
+
+# Multiple Imputation
+  df.MAR.MI <- mice(df.MAR,m=5,maxit=50,meth='pmm',seed=500, print=FALSE) # Object of mice class, can be used with mice-specific command
+  df.MAR.MI <- complete(df.MAR.MI, 'long') # create dataframe of the n-imputed datasets
+
+# Point estimates
+  mean.df.MAR.MI = df.MAR.MI %>% summarise(mean = mean(Mann)) %>% summarise(mean = mean(mean)) %>% .[[1]]
+  paste0("Mean 'Mann' (MAR): ", round(mean.df.MAR.MI,4))
+  
+  #define standard error of mean function (WRONG)
+    std.error <- function(x) sd(x[!is.na(x)])/sqrt(length(x[!is.na(x)])) #Biased!!!!
+  
+  #Calculate the confidence interval (wrong way)
+    paste0("upper.bound (wrong): ", round(mean(df.MAR.MI$Mann) + 1.96* std.error(df.MAR.MI$Mann), 4)) # upper.bound
+    paste0("lower.bound (wrong): ", round(mean(df.MAR.MI$Mann) - 1.96* std.error(df.MAR.MI$Mann), 4)) # lower.bound
+  
+
+  #Calculate the confidence interval (correct)
+     #define standard error for MI datasets
+      # [see above]
+    paste0("upper.bound (true): ", round(mean(df.MAR.MI$Mann) + 1.96* mi_se(df.MAR.MI,"Mann", ".imp"), 4)) # upper.bound
+    paste0("lower.bound (true): ", round(mean(df.MAR.MI$Mann) - 1.96* mi_se(df.MAR.MI,"Mann", ".imp"), 4)) # lower.bound
+
+    
+    
+
+```
+\normalsize
+
+**Evaluation**: Unbiased Estimate (**unbiases SE** \& Confidence Interval)
+
+
+
+
+## MNAR: Multiple Imputation (Point estimate Mann) 
+**Full Dataset (true coefficients)**
+\scriptsize
+```{r MNAR Multiple Imputation (Mann) full, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+# Point estimate
+  paste0("Mean 'Mann' (no missings): ", mean(df$Mann))
+  
+  #define standard error of mean function
+    std.error <- function(x) sd(x[!is.na(x)])/sqrt(length(x[!is.na(x)])) 
+  
+  #Calculate the confidence interval
+    paste0("upper.bound: ", round(mean(df$Mann, na.rm = TRUE) + 1.96*std.error(df$Mann), 4)) # upper.bound
+    paste0("lower.bound: ", round(mean(df$Mann, na.rm = TRUE) - 1.96*std.error(df$Mann), 4)) # lower.bound
+```
+\normalsize
+
+**Missing Dataset **
+\scriptsize
+```{r MNAR Multiple Imputation (Mann) miss wrong, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+if(!require(mice)) install.packages("mice")
+library(mice)
+
+# Multiple Imputation
+  df.MNAR.MI <- mice(df.MNAR,m=5,maxit=50,meth='pmm',seed=500, print=FALSE) # Object of mice class, can be used with mice-specific command
+  df.MNAR.MI <- complete(df.MNAR.MI, 'long') # create dataframe of the n-imputed datasets
+
+# Point estimates
+  mean.df.MNAR.MI = df.MNAR.MI %>% summarise(mean = mean(Mann)) %>% summarise(mean = mean(mean)) %>% .[[1]]
+  paste0("Mean 'Mann' (MAR): ", round(mean.df.MNAR.MI,4))
+  
+  #define standard error of mean function (WRONG)
+    std.error <- function(x) sd(x[!is.na(x)])/sqrt(length(x[!is.na(x)])) #Biased!!!!
+  
+  #Calculate the confidence interval (wrong way)
+    paste0("upper.bound (wrong): ", round(mean(df.MNAR.MI$Mann) + 1.96* std.error(df.MNAR.MI$Mann), 4)) # upper.bound
+    paste0("lower.bound (wrong): ", round(mean(df.MNAR.MI$Mann) - 1.96* std.error(df.MNAR.MI$Mann), 4)) # lower.bound
+  
+
+  #Calculate the confidence interval (correct)
+     #define standard error for MI datasets
+      # [see above]
+    paste0("upper.bound (true): ", round(mean(df.MNAR.MI$Mann) + 1.96* mi_se(df.MNAR.MI,"Mann", ".imp"), 4)) # upper.bound
+    paste0("lower.bound (true): ", round(mean(df.MNAR.MI$Mann) - 1.96* mi_se(df.MNAR.MI,"Mann", ".imp"), 4)) # lower.bound
+
+    
+```
+\normalsize
+
+**Evaluation**: Unbiased Estimate (**unbiases SE** \& Confidence Interval)
+
+
+
+
+# Questions
+
+<center> **Any Questions so far?** </center>
+

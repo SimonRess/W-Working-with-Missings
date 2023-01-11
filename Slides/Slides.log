@@ -1,11 +1,11 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.9.18)  19 SEP 2022 00:00
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.12.19)  10 JAN 2023 18:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **Slides.tex
 (./Slides.tex
-LaTeX2e <2022-06-01> patch level 5
-L3 programming layer <2022-08-30> (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamer.cls
+LaTeX2e <2022-11-01> patch level 1
+L3 programming layer <2022-12-17> (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamer.cls
 Document Class: beamer 2022/09/13 v3.68 A class for typesetting presentations
 (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbasemodes.sty (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/etoolbox/etoolbox.sty
 Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
@@ -24,23 +24,23 @@ Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
 ) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/iftex/iftex.sty
 Package: iftex 2022/02/03 v1.0f TeX engine tests
 )
-\headdp=\dimen138
-\footheight=\dimen139
-\sidebarheight=\dimen140
-\beamer@tempdim=\dimen141
-\beamer@finalheight=\dimen142
-\beamer@animht=\dimen143
-\beamer@animdp=\dimen144
-\beamer@animwd=\dimen145
-\beamer@leftmargin=\dimen146
-\beamer@rightmargin=\dimen147
-\beamer@leftsidebar=\dimen148
-\beamer@rightsidebar=\dimen149
-\beamer@boxsize=\dimen150
-\beamer@vboxoffset=\dimen151
-\beamer@descdefault=\dimen152
-\beamer@descriptionwidth=\dimen153
-\beamer@lastskip=\skip47
+\headdp=\dimen140
+\footheight=\dimen141
+\sidebarheight=\dimen142
+\beamer@tempdim=\dimen143
+\beamer@finalheight=\dimen144
+\beamer@animht=\dimen145
+\beamer@animdp=\dimen146
+\beamer@animwd=\dimen147
+\beamer@leftmargin=\dimen148
+\beamer@rightmargin=\dimen149
+\beamer@leftsidebar=\dimen150
+\beamer@rightsidebar=\dimen151
+\beamer@boxsize=\dimen152
+\beamer@vboxoffset=\dimen153
+\beamer@descdefault=\dimen154
+\beamer@descriptionwidth=\dimen155
+\beamer@lastskip=\skip48
 \beamer@areabox=\box54
 \beamer@animcurrent=\box55
 \beamer@animshowbox=\box56
@@ -71,8 +71,8 @@ Package: iftex 2022/02/03 v1.0f TeX engine tests
 Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
 \KV@toks@=\toks16
 ))
-\beamer@paperwidth=\skip48
-\beamer@paperheight=\skip49
+\beamer@paperwidth=\skip49
+\beamer@paperheight=\skip50
 (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
 (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/iftex/ifvtex.sty
@@ -81,19 +81,19 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 \Gm@cnth=\count273
 \Gm@cntv=\count274
 \c@Gm@tempcnt=\count275
-\Gm@bindingoffset=\dimen154
-\Gm@wd@mp=\dimen155
-\Gm@odd@mp=\dimen156
-\Gm@even@mp=\dimen157
-\Gm@layoutwidth=\dimen158
-\Gm@layoutheight=\dimen159
-\Gm@layouthoffset=\dimen160
-\Gm@layoutvoffset=\dimen161
+\Gm@bindingoffset=\dimen156
+\Gm@wd@mp=\dimen157
+\Gm@odd@mp=\dimen158
+\Gm@even@mp=\dimen159
+\Gm@layoutwidth=\dimen160
+\Gm@layoutheight=\dimen161
+\Gm@layouthoffset=\dimen162
+\Gm@layoutvoffset=\dimen163
 \Gm@dimlist=\toks17
 ) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pgf/math/pgfmath.sty (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex
 \pgfutil@everybye=\toks18
-\pgfutil@tempdima=\dimen162
-\pgfutil@tempdimb=\dimen163
+\pgfutil@tempdima=\dimen164
+\pgfutil@tempdimb=\dimen165
 (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfutil-common-lists.tex)) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def
 \pgfutil@abb=\box60
 ) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.tex (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/pgf.revision.tex)
@@ -104,20 +104,20 @@ Package: pgfrcs 2021/05/15 v3.1.9a (3.1.9a)
 (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfkeysfiltered.code.tex
 \pgfkeys@tmptoks=\toks21
 ))) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.tex
-\pgf@x=\dimen164
-\pgf@xa=\dimen165
-\pgf@xb=\dimen166
-\pgf@xc=\dimen167
-\pgf@y=\dimen168
-\pgf@ya=\dimen169
-\pgf@yb=\dimen170
-\pgf@yc=\dimen171
+\pgf@x=\dimen166
+\pgf@xa=\dimen167
+\pgf@xb=\dimen168
+\pgf@xc=\dimen169
+\pgf@y=\dimen170
+\pgf@ya=\dimen171
+\pgf@yb=\dimen172
+\pgf@yc=\dimen173
 \c@pgf@counta=\count276
 \c@pgf@countb=\count277
 \c@pgf@countc=\count278
 \c@pgf@countd=\count279
 ) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathparser.code.tex
-\pgfmath@dimen=\dimen172
+\pgfmath@dimen=\dimen174
 \pgfmath@count=\count280
 \pgfmath@box=\box61
 \pgfmath@toks=\toks22
@@ -126,7 +126,7 @@ Package: pgfrcs 2021/05/15 v3.1.9a (3.1.9a)
 ) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.tex (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.basic.code.tex) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.trigonometric.code.tex) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.random.code.tex) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.comparison.code.tex) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.base.code.tex) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.round.code.tex) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.misc.code.tex) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.integerarithmetics.code.tex))) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex
 \c@pgfmathroundto@lastzeros=\count281
 ))) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/size10.clo
-File: size10.clo 2021/10/04 v1.4n Standard LaTeX file (size option)
+File: size10.clo 2022/07/02 v1.4n Standard LaTeX file (size option)
 ) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pgf/basiclayer/pgfcore.sty (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
 (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/graphics.sty
@@ -138,23 +138,23 @@ File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: xetex.def on input line 107.
 (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-def/xetex.def
-File: xetex.def 2022/04/16 v5.0m Graphics/color driver for xetex
+File: xetex.def 2022/09/22 v5.0n Graphics/color driver for xetex
 ))
-\Gin@req@height=\dimen173
-\Gin@req@width=\dimen174
+\Gin@req@height=\dimen175
+\Gin@req@width=\dimen176
 ) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pgf/systemlayer/pgfsys.sty (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex
 Package: pgfsys 2021/05/15 v3.1.9a (3.1.9a)
 (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex)
-\pgf@x=\dimen175
-\pgf@y=\dimen176
-\pgf@xa=\dimen177
-\pgf@ya=\dimen178
-\pgf@xb=\dimen179
-\pgf@yb=\dimen180
-\pgf@xc=\dimen181
-\pgf@yc=\dimen182
-\pgf@xd=\dimen183
-\pgf@yd=\dimen184
+\pgf@x=\dimen177
+\pgf@y=\dimen178
+\pgf@xa=\dimen179
+\pgf@ya=\dimen180
+\pgf@xb=\dimen181
+\pgf@yb=\dimen182
+\pgf@xc=\dimen183
+\pgf@yc=\dimen184
+\pgf@xd=\dimen185
+\pgf@yd=\dimen186
 \w@pgf@writea=\write3
 \r@pgf@reada=\read2
 \c@pgf@counta=\count282
@@ -202,28 +202,28 @@ Package xcolor Info: Model `wave' substituted by `hsb' on input line 1376.
 Package: pgfcore 2021/05/15 v3.1.9a (3.1.9a)
 (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfint.code.tex) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.code.tex
 File: pgfcorepoints.code.tex 2021/05/15 v3.1.9a (3.1.9a)
-\pgf@picminx=\dimen185
-\pgf@picmaxx=\dimen186
-\pgf@picminy=\dimen187
-\pgf@picmaxy=\dimen188
-\pgf@pathminx=\dimen189
-\pgf@pathmaxx=\dimen190
-\pgf@pathminy=\dimen191
-\pgf@pathmaxy=\dimen192
-\pgf@xx=\dimen193
-\pgf@xy=\dimen194
-\pgf@yx=\dimen195
-\pgf@yy=\dimen196
-\pgf@zx=\dimen197
-\pgf@zy=\dimen198
+\pgf@picminx=\dimen187
+\pgf@picmaxx=\dimen188
+\pgf@picminy=\dimen189
+\pgf@picmaxy=\dimen190
+\pgf@pathminx=\dimen191
+\pgf@pathmaxx=\dimen192
+\pgf@pathminy=\dimen193
+\pgf@pathmaxy=\dimen194
+\pgf@xx=\dimen195
+\pgf@xy=\dimen196
+\pgf@yx=\dimen197
+\pgf@yy=\dimen198
+\pgf@zx=\dimen199
+\pgf@zy=\dimen256
 ) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathconstruct.code.tex
 File: pgfcorepathconstruct.code.tex 2021/05/15 v3.1.9a (3.1.9a)
-\pgf@path@lastx=\dimen199
-\pgf@path@lasty=\dimen256
+\pgf@path@lastx=\dimen257
+\pgf@path@lasty=\dimen258
 ) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathusage.code.tex
 File: pgfcorepathusage.code.tex 2021/05/15 v3.1.9a (3.1.9a)
-\pgf@shorten@end@additional=\dimen257
-\pgf@shorten@start@additional=\dimen258
+\pgf@shorten@end@additional=\dimen259
+\pgf@shorten@start@additional=\dimen260
 ) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorescopes.code.tex
 File: pgfcorescopes.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 \pgfpic=\box62
@@ -232,12 +232,12 @@ File: pgfcorescopes.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 \pgf@picture@serial@count=\count290
 ) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraphicstate.code.tex
 File: pgfcoregraphicstate.code.tex 2021/05/15 v3.1.9a (3.1.9a)
-\pgflinewidth=\dimen259
+\pgflinewidth=\dimen261
 ) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransformations.code.tex
 File: pgfcoretransformations.code.tex 2021/05/15 v3.1.9a (3.1.9a)
-\pgf@pt@x=\dimen260
-\pgf@pt@y=\dimen261
-\pgf@pt@temp=\dimen262
+\pgf@pt@x=\dimen262
+\pgf@pt@y=\dimen263
+\pgf@pt@temp=\dimen264
 ) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorequick.code.tex
 File: pgfcorequick.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 ) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreobjects.code.tex
@@ -246,10 +246,10 @@ File: pgfcoreobjects.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 File: pgfcorepathprocessing.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 ) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorearrows.code.tex
 File: pgfcorearrows.code.tex 2021/05/15 v3.1.9a (3.1.9a)
-\pgfarrowsep=\dimen263
+\pgfarrowsep=\dimen265
 ) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex
 File: pgfcoreshade.code.tex 2021/05/15 v3.1.9a (3.1.9a)
-\pgf@max=\dimen264
+\pgf@max=\dimen266
 \pgf@sys@shading@range@num=\count291
 \pgf@shadingcount=\count292
 ) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage.code.tex
@@ -273,7 +273,7 @@ Package: xxcolor 2003/10/24 ver 0.1
 Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
 package with kernel methods
 ) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.sty
-Package: hyperref 2022-06-20 v7.00s Hypertext links for LaTeX
+Package: hyperref 2022-11-13 v7.00u Hypertext links for LaTeX
 (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
 Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
 ) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
@@ -284,8 +284,8 @@ Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode not found.
-) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/kvsetkeys/kvsetkeys.sty
-Package: kvsetkeys 2019/12/15 v1.18 Key value parser (HO)
+) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty
+Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
 ) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
 Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
 ) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pdfescape/pdfescape.sty
@@ -307,11 +307,11 @@ Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
 ))
 \c@section@level=\count295
 )
-\@linkdim=\dimen265
+\@linkdim=\dimen267
 \Hy@linkcounter=\count296
 \Hy@pagecounter=\count297
 (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.def
-File: pd1enc.def 2022-06-20 v7.00s Hyperref: PDFDocEncoding definition (HO)
+File: pd1enc.def 2022-11-13 v7.00u Hyperref: PDFDocEncoding definition (HO)
 ) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/intcalc/intcalc.sty
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 ) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/etexcmds/etexcmds.sty
@@ -319,7 +319,7 @@ Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
 )
 \Hy@SavedSpaceFactor=\count298
 (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def
-File: puenc.def 2022-06-20 v7.00s Hyperref: PDF Unicode definition (HO)
+File: puenc.def 2022-11-13 v7.00u Hyperref: PDF Unicode definition (HO)
 )
 Package hyperref Info: Option `unicode' set `true' on input line 4045.
 Package hyperref Info: Option `bookmarks' set `true' on input line 4045.
@@ -331,29 +331,29 @@ Package hyperref Info: Hyper index ON on input line 4170.
 Package hyperref Info: Plain pages OFF on input line 4177.
 Package hyperref Info: Backreferencing OFF on input line 4182.
 Package hyperref Info: Implicit mode OFF; no redefinition of LaTeX internals.
-Package hyperref Info: Bookmarks ON on input line 4408.
+Package hyperref Info: Bookmarks ON on input line 4410.
 \c@Hy@tempcnt=\count299
 (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip16
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
-LaTeX Info: Redefining \url on input line 4746.
-\XeTeXLinkMargin=\dimen266
+LaTeX Info: Redefining \url on input line 4748.
+\XeTeXLinkMargin=\dimen268
 (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/bitset/bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
 (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
 ))
 \Fld@menulength=\count300
-\Field@Width=\dimen267
-\Fld@charsize=\dimen268
-Package hyperref Info: Hyper figures OFF on input line 6024.
-Package hyperref Info: Link nesting OFF on input line 6029.
-Package hyperref Info: Hyper index ON on input line 6032.
-Package hyperref Info: backreferencing OFF on input line 6039.
-Package hyperref Info: Link coloring OFF on input line 6044.
-Package hyperref Info: Link coloring with OCG OFF on input line 6049.
-Package hyperref Info: PDF/A mode OFF on input line 6054.
+\Field@Width=\dimen269
+\Fld@charsize=\dimen270
+Package hyperref Info: Hyper figures OFF on input line 6027.
+Package hyperref Info: Link nesting OFF on input line 6032.
+Package hyperref Info: Hyper index ON on input line 6035.
+Package hyperref Info: backreferencing OFF on input line 6042.
+Package hyperref Info: Link coloring OFF on input line 6047.
+Package hyperref Info: Link coloring with OCG OFF on input line 6052.
+Package hyperref Info: PDF/A mode OFF on input line 6057.
 \Hy@abspage=\count301
 
 Package hyperref Message: Stopped early.
@@ -361,7 +361,7 @@ Package hyperref Message: Stopped early.
 )
 Package hyperref Info: Driver (autodetected): hxetex.
 (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hxetex.def
-File: hxetex.def 2022-06-20 v7.00s Hyperref driver for XeTeX
+File: hxetex.def 2022-11-13 v7.00u Hyperref driver for XeTeX
 (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/stringenc/stringenc.sty
 Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO)
 )
@@ -393,7 +393,7 @@ LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 Package: translator 2021-05-31 v1.12d Easy translation of strings in LaTeX
 )) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbasemisc.sty) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbasetwoscreens.sty) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbaseoverlay.sty
 \beamer@argscount=\count306
-\beamer@lastskipcover=\skip50
+\beamer@lastskipcover=\skip51
 \beamer@trivlistdepth=\count307
 ) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbasetitle.sty) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbasesection.sty
 \c@lecture=\count308
@@ -407,21 +407,21 @@ Package: translator 2021-05-31 v1.12d Easy translation of strings in LaTeX
 \beamer@zoombox=\box69
 \beamer@zoomcount=\count313
 \beamer@zoomframecount=\count314
-\beamer@frametextheight=\dimen269
+\beamer@frametextheight=\dimen271
 \c@subsectionslide=\count315
-\beamer@frametopskip=\skip51
-\beamer@framebottomskip=\skip52
-\beamer@frametopskipautobreak=\skip53
-\beamer@framebottomskipautobreak=\skip54
+\beamer@frametopskip=\skip52
+\beamer@framebottomskip=\skip53
+\beamer@frametopskipautobreak=\skip54
+\beamer@framebottomskipautobreak=\skip55
 \beamer@envbody=\toks29
-\framewidth=\dimen270
+\framewidth=\dimen272
 \c@framenumber=\count316
 ) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbaseverbatim.sty
 \beamer@verbatimfileout=\write4
 ) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbaseframesize.sty
 \beamer@splitbox=\box70
 \beamer@autobreakcount=\count317
-\beamer@autobreaklastheight=\dimen271
+\beamer@autobreaklastheight=\dimen273
 \beamer@frametitletoks=\toks30
 \beamer@framesubtitletoks=\toks31
 ) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbaseframecomponents.sty
@@ -433,39 +433,39 @@ Package: translator 2021-05-31 v1.12d Easy translation of strings in LaTeX
 (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbaseauxtemplates.sty (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbaseboxes.sty
 \bmb@box=\box73
 \bmb@colorbox=\box74
-\bmb@boxwidth=\dimen272
-\bmb@boxheight=\dimen273
-\bmb@prevheight=\dimen274
-\bmb@temp=\dimen275
-\bmb@dima=\dimen276
-\bmb@dimb=\dimen277
-\bmb@prevheight=\dimen278
+\bmb@boxwidth=\dimen274
+\bmb@boxheight=\dimen275
+\bmb@prevheight=\dimen276
+\bmb@temp=\dimen277
+\bmb@dima=\dimen278
+\bmb@dimb=\dimen279
+\bmb@prevheight=\dimen280
 )
-\beamer@blockheadheight=\dimen279
+\beamer@blockheadheight=\dimen281
 )) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbaselocalstructure.sty (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/enumerate.sty
 Package: enumerate 2015/07/23 v3.00 enumerate extensions (DPC)
 \@enLab=\toks33
 )
-\beamer@bibiconwidth=\skip55
+\beamer@bibiconwidth=\skip56
 \c@figure=\count318
 \c@table=\count319
-\abovecaptionskip=\skip56
-\belowcaptionskip=\skip57
+\abovecaptionskip=\skip57
+\belowcaptionskip=\skip58
 ) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbasenavigation.sty
-\beamer@section@min@dim=\dimen280
+\beamer@section@min@dim=\dimen282
 ) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbasetheorems.sty (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2022/04/08 v2.17n AMS math features
-\@mathmargin=\skip58
+\@mathmargin=\skip59
 For additional information on amsmath, use the `?' option.
 (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amstext.sty
 Package: amstext 2021/08/26 v2.01 AMS text
 (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
 \@emptytoks=\toks34
-\ex@=\dimen281
+\ex@=\dimen283
 )) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
-\pmbraise@=\dimen282
+\pmbraise@=\dimen284
 ) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 2022/04/08 v2.04 operator names
 )
@@ -486,7 +486,7 @@ LaTeX Info: Redefining \big on input line 722.
 LaTeX Info: Redefining \Big on input line 723.
 LaTeX Info: Redefining \bigg on input line 724.
 LaTeX Info: Redefining \Bigg on input line 725.
-\big@size=\dimen283
+\big@size=\dimen285
 LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
 \macc@depth=\count325
@@ -504,15 +504,15 @@ LaTeX Info: Redefining \Relbar on input line 971.
 \column@=\count330
 \maxfields@=\count331
 \andhelp@=\toks36
-\eqnshift@=\dimen284
-\alignsep@=\dimen285
-\tagshift@=\dimen286
-\tagwidth@=\dimen287
-\totwidth@=\dimen288
-\lineht@=\dimen289
+\eqnshift@=\dimen286
+\alignsep@=\dimen287
+\tagshift@=\dimen288
+\tagwidth@=\dimen289
+\totwidth@=\dimen290
+\lineht@=\dimen291
 \@envbody=\toks37
-\multlinegap=\skip59
-\multlinetaggap=\skip60
+\multlinegap=\skip60
+\multlinetaggap=\skip61
 \mathdisplay@stack=\toks38
 LaTeX Info: Redefining \[ on input line 2953.
 LaTeX Info: Redefining \] on input line 2954.
@@ -523,29 +523,29 @@ Package: amsthm 2020/05/29 v2.20.6
 \thm@headfont=\toks41
 \thm@notefont=\toks42
 \thm@headpunct=\toks43
-\thm@preskip=\skip61
-\thm@postskip=\skip62
-\thm@headsep=\skip63
+\thm@preskip=\skip62
+\thm@postskip=\skip63
+\thm@headsep=\skip64
 \dth@everypar=\toks44
 )
 \c@theorem=\count332
 ) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerbasethemes.sty)) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerthemedefault.sty (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerfontthemedefault.sty) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamercolorthemedefault.sty) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerinnerthemedefault.sty
-\beamer@dima=\dimen290
-\beamer@dimb=\dimen291
+\beamer@dima=\dimen292
+\beamer@dimb=\dimen293
 ) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamer/beamerouterthemedefault.sty))) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pgf/utilities/pgfpages.sty
 Package: pgfpages 2011/01/05 ver 0.02
 (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/calc.sty
 Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
 \calc@Acount=\count333
 \calc@Bcount=\count334
-\calc@Adimen=\dimen292
-\calc@Bdimen=\dimen293
-\calc@Askip=\skip64
-\calc@Bskip=\skip65
+\calc@Adimen=\dimen294
+\calc@Bdimen=\dimen295
+\calc@Askip=\skip65
+\calc@Bskip=\skip66
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
 \calc@Ccount=\count335
-\calc@Cskip=\skip66
+\calc@Cskip=\skip67
 )
 \pgf@logicalpages=\count336
 \pgf@firstshipout=\count337
@@ -553,8 +553,8 @@ LaTeX Info: Redefining \addtolength on input line 81.
 \pgf@currentshipout=\count339
 \pgf@cpn=\count340
 \pgf@shipoutnextto=\count341
-\pgfphysicalheight=\dimen294
-\pgfphysicalwidth=\dimen295
+\pgfphysicalheight=\dimen296
+\pgfphysicalwidth=\dimen297
 \pgfpages@shipoutbox=\box77
 ) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/lmodern.sty
 Package: lmodern 2015/05/01 v1.6.1 Latin Modern Fonts
@@ -591,9 +591,9 @@ LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 (Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 38.
 ) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/unicode-math/unicode-math.sty (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3kernel/expl3.sty
-Package: expl3 2022-08-30 L3 programming layer (loader) 
+Package: expl3 2022-12-17 L3 programming layer (loader) 
 (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-xetex.def
-File: l3backend-xetex.def 2022-08-30 L3 backend support: XeTeX
+File: l3backend-xetex.def 2022-10-26 L3 backend support: XeTeX
 \g__graphics_track_int=\count342
 \l__pdf_internal_box=\box78
 \g__pdf_backend_object_int=\count343
@@ -604,9 +604,9 @@ Package: unicode-math 2020/01/31 v0.8q Unicode maths in XeLaTeX and LuaLaTeX
 (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/unicode-math/unicode-math-xetex.sty
 Package: unicode-math-xetex 2020/01/31 v0.8q Unicode maths in XeLaTeX and LuaLaTeX
 (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
-Package: xparse 2022-06-22 L3 Experimental document command parser
+Package: xparse 2022-12-17 L3 Experimental document command parser
 ) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty
-Package: l3keys2e 2022-06-22 LaTeX2e option processing using LaTeX3 keys
+Package: l3keys2e 2022-12-17 LaTeX2e option processing using LaTeX3 keys
 ) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/fontspec/fontspec.sty
 Package: fontspec 2022/01/15 v2.8a Font selection for XeLaTeX and LuaLaTeX
 (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/fontspec/fontspec-xetex.sty
@@ -622,9 +622,9 @@ Package: fontspec-xetex 2022/01/15 v2.8a Font selection for XeLaTeX and LuaLaTeX
 \l__fontspec_emdef_int=\count354
 \l__fontspec_strong_int=\count355
 \l__fontspec_strongdef_int=\count356
-\l__fontspec_tmpa_dim=\dimen296
-\l__fontspec_tmpb_dim=\dimen297
-\l__fontspec_tmpc_dim=\dimen298
+\l__fontspec_tmpa_dim=\dimen298
+\l__fontspec_tmpb_dim=\dimen299
+\l__fontspec_tmpc_dim=\dimen300
 (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/fontenc.sty
 Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
 ) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/fontspec/fontspec.cfg))) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/fix-cm.sty
@@ -637,7 +637,11 @@ LaTeX Font Info:    Redeclaring font encoding TS1 on input line 47.
 \g__um_fonts_used_int=\count358
 \l__um_primecount_int=\count359
 \g__um_primekern_muskip=\muskip18
-(c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/unicode-math/unicode-math-table.tex))) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
+(c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/unicode-math/unicode-math-table.tex))) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/upquote/upquote.sty
+Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verbatim
+(c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/textcomp.sty
+Package: textcomp 2020/02/02 v2.0n Standard LaTeX package
+)) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
 Package: fancyvrb 2022/06/06 4.5 verbatim text (tvz,hv)
 \FV@CodeLineNo=\count360
 \FV@InFile=\read3
@@ -647,19 +651,19 @@ Package: fancyvrb 2022/06/06 4.5 verbatim text (tvz,hv)
 \FV@OutFile=\write5
 ) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/framed/framed.sty
 Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
-\OuterFrameSep=\skip67
-\fb@frw=\dimen299
-\fb@frh=\dimen300
-\FrameRule=\dimen301
-\FrameSep=\dimen302
+\OuterFrameSep=\skip68
+\fb@frw=\dimen301
+\fb@frh=\dimen302
+\FrameRule=\dimen303
+\FrameSep=\dimen304
 ) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/longtable.sty
 Package: longtable 2021-09-01 v4.17 Multi-page Table package (DPC)
-\LTleft=\skip68
-\LTright=\skip69
-\LTpre=\skip70
-\LTpost=\skip71
+\LTleft=\skip69
+\LTright=\skip70
+\LTpre=\skip71
+\LTpost=\skip72
 \LTchunksize=\count363
-\LTcapwidth=\dimen303
+\LTcapwidth=\dimen305
 \LT@head=\box80
 \LT@firsthead=\box81
 \LT@foot=\box82
@@ -672,44 +676,44 @@ Package: longtable 2021-09-01 v4.17 Multi-page Table package (DPC)
 \LT@p@ftn=\toks45
 ) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/booktabs/booktabs.sty
 Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
-\heavyrulewidth=\dimen304
-\lightrulewidth=\dimen305
-\cmidrulewidth=\dimen306
-\belowrulesep=\dimen307
-\belowbottomsep=\dimen308
-\aboverulesep=\dimen309
-\abovetopsep=\dimen310
-\cmidrulesep=\dimen311
-\cmidrulekern=\dimen312
-\defaultaddspace=\dimen313
+\heavyrulewidth=\dimen306
+\lightrulewidth=\dimen307
+\cmidrulewidth=\dimen308
+\belowrulesep=\dimen309
+\belowbottomsep=\dimen310
+\aboverulesep=\dimen311
+\abovetopsep=\dimen312
+\cmidrulesep=\dimen313
+\cmidrulekern=\dimen314
+\defaultaddspace=\dimen315
 \@cmidla=\count368
 \@cmidlb=\count369
-\@aboverulesep=\dimen314
-\@belowrulesep=\dimen315
+\@aboverulesep=\dimen316
+\@belowrulesep=\dimen317
 \@thisruleclass=\count370
 \@lastruleclass=\count371
-\@thisrulewidth=\dimen316
+\@thisrulewidth=\dimen318
 ) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/array.sty
-Package: array 2022/03/10 v2.5f Tabular extension package (FMi)
-\col@sep=\dimen317
+Package: array 2022/09/04 v2.5g Tabular extension package (FMi)
+\col@sep=\dimen319
 \ar@mcellbox=\box85
-\extrarowheight=\dimen318
+\extrarowheight=\dimen320
 \NC@list=\toks46
-\extratabsurround=\skip72
-\backup@length=\skip73
+\extratabsurround=\skip73
+\backup@length=\skip74
 \ar@cellbox=\box86
 ) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/caption/caption.sty
 Package: caption 2022/03/01 v3.6b Customizing captions (AR)
 (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/caption/caption3.sty
 Package: caption3 2022/03/17 v2.3b caption3 kernel (AR)
-\caption@tempdima=\dimen319
-\captionmargin=\dimen320
-\caption@leftmargin=\dimen321
-\caption@rightmargin=\dimen322
-\caption@width=\dimen323
-\caption@indent=\dimen324
-\caption@parindent=\dimen325
-\caption@hangindent=\dimen326
+\caption@tempdima=\dimen321
+\captionmargin=\dimen322
+\caption@leftmargin=\dimen323
+\caption@rightmargin=\dimen324
+\caption@width=\dimen325
+\caption@indent=\dimen326
+\caption@parindent=\dimen327
+\caption@hangindent=\dimen328
 Package caption Info: beamer document class detected.
 (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/caption/caption-beamer.sto
 File: caption-beamer.sto 2022/01/06 v2.0c Adaption of the caption package to the beamer document classes (AR)
@@ -739,15 +743,15 @@ File: pgfmoduleshapes.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 File: pgfmoduleplot.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 ) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-0-65.sty
 Package: pgfcomp-version-0-65 2021/05/15 v3.1.9a (3.1.9a)
-\pgf@nodesepstart=\dimen327
-\pgf@nodesepend=\dimen328
+\pgf@nodesepstart=\dimen329
+\pgf@nodesepend=\dimen330
 ) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-1-18.sty
 Package: pgfcomp-version-1-18 2021/05/15 v3.1.9a (3.1.9a)
 )) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pgf/utilities/pgffor.sty (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgffor.code.tex
 Package: pgffor 2021/05/15 v3.1.9a (3.1.9a)
 (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)
-\pgffor@iter=\dimen329
-\pgffor@skip=\dimen330
+\pgffor@iter=\dimen331
+\pgffor@skip=\dimen332
 \pgffor@stack=\toks49
 \pgffor@toks=\toks50
 )) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
@@ -755,16 +759,16 @@ Package: tikz 2021/05/15 v3.1.9a (3.1.9a)
 (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers.code.tex
 File: pgflibraryplothandlers.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 \pgf@plot@mark@count=\count374
-\pgfplotmarksize=\dimen331
+\pgfplotmarksize=\dimen333
 )
-\tikz@lastx=\dimen332
-\tikz@lasty=\dimen333
-\tikz@lastxsaved=\dimen334
-\tikz@lastysaved=\dimen335
-\tikz@lastmovetox=\dimen336
-\tikz@lastmovetoy=\dimen337
-\tikzleveldistance=\dimen338
-\tikzsiblingdistance=\dimen339
+\tikz@lastx=\dimen334
+\tikz@lasty=\dimen335
+\tikz@lastxsaved=\dimen336
+\tikz@lastysaved=\dimen337
+\tikz@lastmovetox=\dimen338
+\tikz@lastmovetoy=\dimen339
+\tikzleveldistance=\dimen340
+\tikzsiblingdistance=\dimen341
 \tikz@figbox=\box88
 \tikz@figbox@bg=\box89
 \tikz@tempbox=\box90
@@ -783,17 +787,17 @@ File: pgfmodulematrix.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarytopaths.code.tex
 File: tikzlibrarytopaths.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 )))
-\metropolis@titleseparator@linewidth=\skip74
-\metropolis@progressonsectionpage=\skip75
-\metropolis@progressonsectionpage@linewidth=\skip76
-\metropolis@blocksep=\skip77
-\metropolis@blockadjust=\skip78
-\metropolis@parskip=\skip79
+\metropolis@titleseparator@linewidth=\skip75
+\metropolis@progressonsectionpage=\skip76
+\metropolis@progressonsectionpage@linewidth=\skip77
+\metropolis@blocksep=\skip78
+\metropolis@blockadjust=\skip79
+\metropolis@parskip=\skip80
 ) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamertheme-metropolis/beamerouterthememetropolis.sty
 Package: beamerouterthememetropolis 2017/01/23 Metropolis outer theme
-\metropolis@frametitle@padding=\skip80
-\metropolis@progressinheadfoot=\skip81
-\metropolis@progressinheadfoot@linewidth=\skip82
+\metropolis@frametitle@padding=\skip81
+\metropolis@progressinheadfoot=\skip82
+\metropolis@progressinheadfoot@linewidth=\skip83
 ) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamertheme-metropolis/beamercolorthememetropolis.sty
 Package: beamercolorthememetropolis 2017/01/23 Metropolis color theme
 ) (c:/Users/simon/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/beamertheme-metropolis/beamerfontthememetropolis.sty
@@ -1173,101 +1177,305 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 214.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [3
 
+] [4
+
+] [5
+
 ]
 LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <10> not available
-(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 229.
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 267.
 File: Slides_files/figure-beamer/planing-dataset-creation-1.pdf Graphic file (type pdf)
 <use Slides_files/figure-beamer/planing-dataset-creation-1.pdf>
 
-Overfull \vbox (56.20412pt too high) detected at line 229
+Overfull \vbox (56.20412pt too high) detected at line 267
  []
 
-[4
+[6
 
 ]
 \openout4 = `Slides.vrb'.
 
-(./Slides.vrb) [5
+(./Slides.vrb) [7
 
 ]
 \openout4 = `Slides.vrb'.
 
-(./Slides.vrb) [6
+(./Slides.vrb) [8
 
 ]
-Overfull \vbox (14.56247pt too high) detected at line 339
+Overfull \vbox (14.56247pt too high) detected at line 377
  []
 
-[7
+[9
+
+] [10
 
 ]
-Overfull \vbox (14.56247pt too high) detected at line 399
+Overfull \vbox (14.56247pt too high) detected at line 443
  []
 
-[8
-
-] [9
-
-]
-File: Slides_files/figure-beamer/DAG1-1.pdf Graphic file (type pdf)
-<use Slides_files/figure-beamer/DAG1-1.pdf>
-[10
-
-]
-File: Slides_files/figure-beamer/DAG2-1.pdf Graphic file (type pdf)
-<use Slides_files/figure-beamer/DAG2-1.pdf>
 [11
 
-]
-File: Slides_files/figure-beamer/DAG3-1.pdf Graphic file (type pdf)
-<use Slides_files/figure-beamer/DAG3-1.pdf>
-[12
+] [12
 
 ] [13
 
 ] [14
 
-] [15
+]
+Underfull \hbox (badness 4899) in paragraph at lines 571--571
+ [][]\TU/lmss/bx/n/12 B.II Check if confidence interval encloses true effect 
+ []
 
-] [16
+[15
+
+]
+Underfull \hbox (badness 4899) in paragraph at lines 612--612
+ [][]\TU/lmss/bx/n/12 B.II Check if confidence interval encloses true effect 
+ []
+
+[16
 
 ] [17
 
 ] [18
 
-] [19
+]
+\openout4 = `Slides.vrb'.
 
-] [20
+(./Slides.vrb
+File: Slides_files/figure-beamer/DAG1-1.pdf Graphic file (type pdf)
+<use Slides_files/figure-beamer/DAG1-1.pdf>
+)
+Overfull \vbox (15.19112pt too high) detected at line 663
+ []
+
+[19
 
 ]
 \openout4 = `Slides.vrb'.
 
-(./Slides.vrb) [21
-
-]
-File: Slides_files/figure-beamer/pressure-1.pdf Graphic file (type pdf)
-<use Slides_files/figure-beamer/pressure-1.pdf>
-
-Overfull \vbox (0.30597pt too high) detected at line 625
+(./Slides.vrb
+File: Slides_files/figure-beamer/DAG2-1.pdf Graphic file (type pdf)
+<use Slides_files/figure-beamer/DAG2-1.pdf>
+)
+Overfull \vbox (15.19112pt too high) detected at line 694
  []
 
-[22
+[20
 
 ]
-File: Slides_files/figure-beamer/AirPassengers-1.pdf Graphic file (type pdf)
-<use Slides_files/figure-beamer/AirPassengers-1.pdf>
-[23
+\openout4 = `Slides.vrb'.
+
+(./Slides.vrb
+File: Slides_files/figure-beamer/DAG3-1.pdf Graphic file (type pdf)
+<use Slides_files/figure-beamer/DAG3-1.pdf>
+)
+Overfull \vbox (15.19112pt too high) detected at line 725
+ []
+
+[21
+
+] [22
+
+] [23
 
 ] [24
 
-] [25
+]
+LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <8> not available
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 795.
+[25
 
 ]
-File: Slides_files/RUB.jpg Graphic file (type bmp)
-<Slides_files/RUB.jpg>
-[26
+\openout4 = `Slides.vrb'.
 
-] [27
+(./Slides.vrb
+LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <7> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 7.
+) [26
+
+]
+\openout4 = `Slides.vrb'.
+
+(./Slides.vrb) [27
+
+]
+\openout4 = `Slides.vrb'.
+
+(./Slides.vrb) [28
+
+]
+\openout4 = `Slides.vrb'.
+
+(./Slides.vrb) [29
+
+]
+\openout4 = `Slides.vrb'.
+
+(./Slides.vrb) [30
+
+]
+\openout4 = `Slides.vrb'.
+
+(./Slides.vrb) [31
+
+]
+\openout4 = `Slides.vrb'.
+
+(./Slides.vrb) [32
+
+]
+LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <9> not available
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 1056.
+[33
+
+]
+\openout4 = `Slides.vrb'.
+
+(./Slides.vrb) [34
+
+]
+\openout4 = `Slides.vrb'.
+
+(./Slides.vrb) [35
+
+]
+\openout4 = `Slides.vrb'.
+
+(./Slides.vrb) [36
+
+]
+\openout4 = `Slides.vrb'.
+
+(./Slides.vrb) [37
+
+]
+\openout4 = `Slides.vrb'.
+
+(./Slides.vrb) [38
+
+] [39
+
+] [40
+
+]
+\openout4 = `Slides.vrb'.
+
+(./Slides.vrb) [41
+
+]
+\openout4 = `Slides.vrb'.
+
+(./Slides.vrb) [42
+
+]
+\openout4 = `Slides.vrb'.
+
+(./Slides.vrb) [43
+
+]
+\openout4 = `Slides.vrb'.
+
+(./Slides.vrb) [44
+
+]
+\openout4 = `Slides.vrb'.
+
+(./Slides.vrb) [45
+
+]
+\openout4 = `Slides.vrb'.
+
+(./Slides.vrb) [46
+
+] [47
+
+]
+Overfull \vbox (13.37433pt too high) detected at line 1529
+ []
+
+[48
+
+]
+\openout4 = `Slides.vrb'.
+
+(./Slides.vrb) [49
+
+]
+\openout4 = `Slides.vrb'.
+
+(./Slides.vrb) [50
+
+]
+\openout4 = `Slides.vrb'.
+
+(./Slides.vrb)
+Underfull \hbox (badness 1199) in paragraph at lines 1622--1622
+ [][]\TU/lmss/bx/n/12 MCAR: Mean/Median Imputation (Point estimate Mann) 
+ []
+
+[51
+
+]
+\openout4 = `Slides.vrb'.
+
+(./Slides.vrb) [52
+
+] [53
+
+]
+\openout4 = `Slides.vrb'.
+
+(./Slides.vrb
+LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <5> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 37.
+)
+Overfull \vbox (10.4101pt too high) detected at line 1733
+ []
+
+[54
+
+]
+\openout4 = `Slides.vrb'.
+
+(./Slides.vrb) [55
+
+]
+\openout4 = `Slides.vrb'.
+
+(./Slides.vrb) [56
+
+]
+\openout4 = `Slides.vrb'.
+
+(./Slides.vrb)
+Overfull \vbox (11.24202pt too high) detected at line 1855
+ []
+
+[57
+
+]
+\openout4 = `Slides.vrb'.
+
+(./Slides.vrb)
+Overfull \vbox (11.24202pt too high) detected at line 1901
+ []
+
+[58
+
+]
+\openout4 = `Slides.vrb'.
+
+(./Slides.vrb)
+Overfull \vbox (11.24202pt too high) detected at line 1947
+ []
+
+[59
+
+] [60
+
+] [61
 
 ]
 \tf@nav=\write7
@@ -1281,15 +1489,15 @@ File: Slides_files/RUB.jpg Graphic file (type bmp)
 
 (./Slides.aux)
 Package rerunfilecheck Info: File `Slides.out' has not changed.
-(rerunfilecheck)             Checksum: 578341DA522485C636C43C1A97D48640;533.
+(rerunfilecheck)             Checksum: E25DAD205ABF67E05343AF025E8A5E7F;668.
  ) 
 Here is how much of TeX's memory you used:
- 33550 strings out of 477747
- 710007 string characters out of 5842523
- 1136103 words of memory out of 5000000
- 53953 multiletter control sequences out of 15000+600000
- 472860 words of font info for 68 fonts, out of 8000000 for 9000
+ 33679 strings out of 478777
+ 710972 string characters out of 5849314
+ 1862973 words of memory out of 5000000
+ 52983 multiletter control sequences out of 15000+600000
+ 515952 words of font info for 80 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 101i,13n,121p,1893b,749s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 101i,13n,121p,1893b,753s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on Slides.pdf (27 pages).
+Output written on Slides.pdf (61 pages).
